@@ -1,2 +1,11 @@
 README.md
-LICENSe
+LICENSE
+{{- if ne .chezmoi.hostname "pau-dev" }}
+.bashrc.d/bashrc
+{{- end }}
+{{- if eq .chezmoi.hostname "pau-dev" }}
+.bashrc
+{{- end }}
+{{- if eq .chezmoi.hostname "pau-dev" }}
+.bash_profile
+{{- end }}

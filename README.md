@@ -12,6 +12,12 @@ In order for these dotfiles to shine I recommend installing:
   - [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy): Supercharge your git diffs
   - [exa](https://github.com/ogham/exa): ls on steroids
 
+## nvim
+
+You need at least the 0.5.
+Once installed you need to run `:PackerInstall`.
+After that, run `:LspInstall <language>` to install the lsp servers.
+
 ## TODO
 
   - [ ] ssh?
