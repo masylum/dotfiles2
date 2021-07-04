@@ -60,13 +60,23 @@ vim.api.nvim_set_keymap('n', '<Leader>f', ':NERDTreeFind<CR>', {noremap = true, 
 vim.api.nvim_set_keymap('n', '<Leader>h', ':set hlsearch!<CR>', {noremap = true, silent = true})
 
 local mappings = {
-  ["/"] = "Comment",
-  ["c"] = "Close Buffer",
-  ["n"] = "Tree",
-  ["f"] = "Tree file",
-  ["h"] = "No Highlight",
+  ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
+  ["c"] = {"<cmd>BufferClose<cr>", "Close Buffer"},
+  ["n"] = {"<cmd>NERDTreeToggle<cr>", "Explorer"},
+  ["f"] = {"<cmd>NERDTreeFind<cr>", "Tree File"},
+  ["h"] = {"<cmd>set hlsearch!<cr>", "No Highlight"},
+
+  d = {
+    name = "Diagnostics",
+    t = {"<cmd>TroubleToggle<cr>", "trouble"},
+    w = {"<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace"},
+    d = {"<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document"},
+    q = {"<cmd>TroubleToggle quickfix<cr>", "quickfix"},
+    l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
+    r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
+  },
   l = {
-    name = "+LSP",
+    name = "LSP",
     a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
     A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
     f = {"<cmd>LspFormatting<cr>", "Format"},
@@ -81,10 +91,10 @@ local mappings = {
     s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
     S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"},
     d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
-    D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
+    D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"}
   },
   g = {
-    name = "+Git",
+    name = "Git",
     j = {"<cmd>NextHunk<cr>", "Next Hunk"},
     k = {"<cmd>PrevHunk<cr>", "Prev Hunk"},
     p = {"<cmd>PreviewHunk<cr>", "Preview Hunk"},
@@ -94,8 +104,13 @@ local mappings = {
     b = {"<cmd>BlameLine<cr>", "Blame"},
     u = {"<cmd>UndoStageHunk<cr>", "Undo Stage Hunk"}
   },
+  r = {
+    name = "Replace",
+    f = {"<cmd>lua require('spectre').open_file_search()<cr>", "Current File"},
+    p = {"<cmd>lua require('spectre').open()<cr>", "Project"}
+  },
   s = {
-    name = "+Search",
+    name = "Search",
     s = {"<cmd>Telescope git_status<cr>", "Open changed file"},
     c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
     b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
@@ -108,5 +123,24 @@ local mappings = {
   },
 }
 
+local visualOpts = {
+  mode = "v", -- Visual mode
+  prefix = "<leader>",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = false -- use `nowait` when creating keymaps
+}
+
+local visualMappings = {
+  ["/"] = {"<cmd>CommentToggle<cr>", "Comment"},
+  r = {
+    name = "Replace",
+    f = {"<cmd>lua require('spectre').open_visual({path = vim.fn.expand('%')})<cr>", "File"},
+    p = {"<cmd>lua require('spectre').open_visual()<cr>", "Project"}
+  }
+}
+
 local wk = require("which-key")
 wk.register(mappings, opts)
+wk.register(visualMappings, visualOpts)

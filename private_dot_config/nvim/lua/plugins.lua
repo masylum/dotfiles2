@@ -36,7 +36,6 @@ return require("packer").startup(function(use)
   use { "neovim/nvim-lspconfig", opt = true }     -- A collection of common configurations for Neovim's built-in language server client.
   use { "glepnir/lspsaga.nvim", opt = true }      -- A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
   use { "kabouzeid/nvim-lspinstall", opt = true } -- Provides the missing :LspInstall for nvim-lspconfig
-  use { "folke/trouble.nvim", opt = true }        -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
   use 'folke/lsp-colors.nvim'
 
   -- Telescope
@@ -89,10 +88,17 @@ return require("packer").startup(function(use)
   use 'tpope/vim-repeat'
   use 'christoomey/vim-tmux-navigator'
 
+  -- Diagnostics
+  use { "folke/trouble.nvim", cmd = 'TroubleToggle' }
+  require_plugin('trouble.nvim')
+
+  -- Search and replace
+  use {'windwp/nvim-spectre', opt = true}
+  require_plugin('nvim-spectre')
+
   require_plugin("nvim-lspconfig")
   require_plugin("lspsaga.nvim")
   require_plugin("nvim-lspinstall")
-  require_plugin('trouble.nvim')
   require_plugin("friendly-snippets")
   require_plugin("popup.nvim")
   require_plugin("plenary.nvim")
