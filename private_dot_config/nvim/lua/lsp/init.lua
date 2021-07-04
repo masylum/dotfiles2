@@ -4,8 +4,8 @@ local lsp = vim.lsp
 
 -- TODO figure out why this don't work
 fn.sign_define(
-  "LspDiagnosticsSignError",
-  {texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError"}
+    "LspDiagnosticsSignError",
+    {texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError"}
 )
 fn.sign_define(
     "LspDiagnosticsSignWarning",
@@ -37,14 +37,14 @@ cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").togg
 -- Set Default Prefix.
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
 lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
-  lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-      prefix = "⎨",
-      spacing = 2,
-    },
-    signs = true,
-    underline = true,
-  }
+    lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = {
+            prefix = "⎨",
+            spacing = 2,
+        },
+        signs = true,
+        underline = true,
+    }
 )
 
 -- Symbols for autocomplete
@@ -77,27 +77,29 @@ lsp.protocol.CompletionItemKind = {
 }
 
 local function documentHighlight(client, bufnr)
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
-      augroup lsp_document_highlight
-      autocmd! * <buffer>
-      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-      ]],
-      false
-    )
-  end
+    -- Set autocommands conditional on server_capabilities
+    if client.resolved_capabilities.document_highlight then
+        vim.api.nvim_exec(
+            [[
+            hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
+            hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
+            hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
+            augroup lsp_document_highlight
+            autocmd! * <buffer>
+            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+            augroup END
+            ]],
+            false
+        )
+    end
 end
 local lsp_config = {}
 
-function lsp_config.common_on_attach(client, bufnr)
-  documentHighlight(client, bufnr)
+if O.document_highlight then
+    function lsp_config.common_on_attach(client, bufnr)
+        documentHighlight(client, bufnr)
+    end
 end
 
 function lsp_config.tsserver_on_attach(client, bufnr)

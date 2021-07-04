@@ -19,7 +19,7 @@ vim.g.syntax = true
 
 opt.backup          = false                     -- creates a backup file
 -- opt.clipboard       = "unnamedplus"          -- allows neovim to access the system clipboard
--- opt.cmdheight       = 2                      -- more space in the neovim command line for displaying messages
+opt.cmdheight       = 2                         -- more space in the neovim command line for displaying messages
 opt.colorcolumn     = "99999"                   -- fix indentline for now
 opt.completeopt     = {'menuone', 'noselect'}
 opt.conceallevel    = 0                         -- so that `` is visible in markdown files
@@ -46,13 +46,13 @@ opt.undofile        = true                      -- enable persisten undo
 opt.updatetime      = 300                       -- faster completion
 opt.writebackup     = false                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 opt.expandtab       = true                      -- convert tabs to spaces
-opt.shiftwidth      = 2                         -- the number of spaces inserted for each indentation
+opt.shiftwidth      = 4                         -- the number of spaces inserted for each indentation
 opt.shortmess:append("c")                       -- don't pass messages to |ins-completion-menu|
-opt.tabstop         = 2                         -- insert 4 spaces for a tab
+opt.tabstop         = 4                         -- insert 4 spaces for a tab
 opt.cursorline      = O.cursorline              -- highlight the current line
 opt.number          = O.number                  -- set numbered lines
 opt.relativenumber  = O.relative_number         -- set relative numbered lines
--- opt.signcolumn      = "yes"                  -- always show the sign column, otherwise it would shift the text each time
+opt.signcolumn      = "yes"                     -- always show the sign column, otherwise it would shift the text each time
 opt.wrap            = O.wrap_lines              -- display lines as one long line
 
 -- CUSTOM
