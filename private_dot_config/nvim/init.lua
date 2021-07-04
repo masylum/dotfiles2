@@ -1,39 +1,18 @@
 -- Based on Lunarvim
+require('default-config')
+require('autocommands')
 require('settings')
 require('plugins')
-require('colorscheme')
+vim.g.colors_name = 'dracula'
+vim.g.syntax = true
 require('keymappings')
-require('treesitter')
-require('autocommands')
-require('utils')
-
--- TODO is there a way to do this without vimscript
-vim.cmd('source '..vim.fn.stdpath('config')..'/vimscript/functions.vim')
-
--- LSP
-require('lsp')
-require('lsp/css')
-require('lsp/docker')
-require('lsp/go')
-require('lsp/graphql')
-require('lsp/html')
-require('lsp/js-ts')
-require('lsp/json')
-require('lsp/lua')
-require('lsp/ruby')
-require('lsp/terraform')
 
 -- Plugins configuration
-require('plugins/comment')
-require('plugins/git-signs')
-require('plugins/lsp-color')
-require('plugins/lsp-install')
-require('plugins/lspsaga')
-require('plugins/lualine')
-require('plugins/matchup')
-require('plugins/nerdtree')
-require('plugins/nvim-compe')
-require('plugins/telescope')
-require('plugins/tmux-navigator')
+require('plugins/nvim-treesitter')
 require('plugins/which-key')
-require('plugins/spectre')
+require('plugins/lsp-color')
+require('plugins/lualine')
+require('plugins/nerdtree')
+require('plugins/tmux-navigator')
+
+require('lsp')
