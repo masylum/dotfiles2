@@ -56,6 +56,7 @@ opt.signcolumn      = "yes"                     -- always show the sign column, 
 opt.wrap            = O.wrap_lines              -- display lines as one long line
 
 -- CUSTOM
+-- TODO: Port to LunarVim
 cmd('set wildmode=list:longest,list:full') -- Show menu with possible tab competions
 cmd('set wildignore+=.git,.svn')
 cmd('set wildignore+=*.o,*.obj,*.jpg,*.png,*.gif,*.log,*.gz,*.bin,*.gem,*.rbc,*.class')
@@ -63,3 +64,4 @@ cmd('set wildignore+=*.min.js,**/node_modules/**,**/images/**')
 cmd('set wildignore+=**/assets/**/original/**,**/assets/**/thumb/**,**/assets/**/small/**')
 cmd('set wildignore+=tmp,public,vendor/bundle/*,vendor/cache/*,test/fixtures/*,vendor/gems/*,spec/cov,a/*')
 cmd('set wildignore+=sorbet/*')
+O.document_highlight = true

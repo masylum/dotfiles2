@@ -31,7 +31,7 @@ O = {
             formatter = '',
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             }
@@ -43,7 +43,7 @@ O = {
             formatter = '',
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             }
@@ -53,14 +53,14 @@ O = {
             formatter = '',
             autoformat = false,
             diagnostics = {
-                virtual_text = {spacing = 0, prefix = ""},
+                virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             }
         },
         ruby = {
             diagnostics = {
-                virtualtext = {spacing = 0, prefix = ""},
+                virtualtext = {spacing = 0, prefix = "⎨"},
                 signs = true,
                 underline = true
             },

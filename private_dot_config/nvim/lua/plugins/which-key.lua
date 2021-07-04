@@ -26,7 +26,7 @@ require("which-key").setup {
         padding = {0, 0, 0, 0} -- extra window padding [top, right, bottom, left]
     },
     layout = {
-        height = {min = 4, max = 25}, -- min and max height of the columns
+        height = {min = 5, max = 25}, -- min and max height of the columns
         width = {min = 20, max = 70}, -- min and max width of the columns
         spacing = 5 -- spacing between columns
     },
@@ -52,27 +52,19 @@ local opts = {
     nowait = false -- use `nowait` when creating keymaps
 }
 
--- no hl
-vim.api.nvim_set_keymap('n', '<Leader>h', ':let @/=""<CR>',
-    {noremap = true, silent = true})
+-- Comments
+vim.api.nvim_set_keymap("n", "<leader>/", ":CommentToggle<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", {noremap = true, silent = true})
 
--- tree
+-- No Highlights
+vim.api.nvim_set_keymap('n', '<Leader>h', ':let @/=""<CR>', {noremap = true, silent = true})
+
+-- NerdTree
 vim.api.nvim_set_keymap('n', '<Leader>n', ":NERDTreeToggle<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>f', ':NERDTreeFind<CR>', {noremap = true, silent = true})
 
--- dashboard
-vim.api.nvim_set_keymap('n', '<Leader>;', ':Dashboard<CR>',
-    {noremap = true, silent = true})
-
--- Comments
-vim.api.nvim_set_keymap("n", "<leader>/", ":CommentToggle<CR>",
-    {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>",
-    {noremap = true, silent = true})
-
--- close buffer
-vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete<CR>",
-    {noremap = true, silent = true})
+-- Close buffer
+vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete<CR>", {noremap = true, silent = true})
 
 -- TODO create entire treesitter section
 
@@ -83,39 +75,11 @@ local mappings = {
     ["f"] = "Find File",
     ["h"] = "No Highlight",
 
-    b = {
-        name = "Buffers",
-        j = {"<cmd>BufferPick<cr>", "jump to buffer"},
-        f = {"<cmd>Telescope buffers<cr>", "Find buffer"},
-        w = {"<cmd>BufferWipeout<cr>", "wipeout buffer"},
-        e = {"<cmd>BufferCloseAllButCurrent<cr>", "close all but current buffer"},
-        h = {"<cmd>BufferCloseBuffersLeft<cr>", "close all buffers to the left"},
-        l = {
-            "<cmd>BufferCloseBuffersRight<cr>",
-            "close all BufferLines to the right"
-        },
-        D = {
-            "<cmd>BufferOrderByDirectory<cr>",
-            "sort BufferLines automatically by directory"
-        },
-        L = {
-            "<cmd>BufferOrderByLanguage<cr>",
-            "sort BufferLines automatically by language"
-        }
-    },
     g = {
         name = "Git",
         j = {"<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk"},
         k = {"<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk"},
         l = {"<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame"},
-        p = {"<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk"},
-        r = {"<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk"},
-        R = {"<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer"},
-        s = {"<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk"},
-        u = {
-            "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-            "Undo Stage Hunk"
-        },
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
@@ -155,12 +119,11 @@ local mappings = {
     },
     s = {
         name = "Search",
-        b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
-        c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
-        h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
-        -- m = {"<cmd>Telescope marks<cr>", "Marks"},
-        M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
+        b = {"<cmd>Telescope buffers<cr>", "Find buffer"},
+        f = {"<cmd>Telescope find_files<cr>", "Find File"},
+        r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
+        t = {"<cmd>Telescope live_grep<cr>", "Text"}
     },
     T = {
         name = "Treesitter",
