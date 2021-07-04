@@ -1,8 +1,10 @@
 local M = {}
 
+vim.g.vsnip_snippet_dir = O.vnsip_dir
+
 M.config = function()
   opt = {
-    enabled = true,
+    enabled = O.auto_complete,
     autocomplete = true,
     debug = false,
     min_length = 1,

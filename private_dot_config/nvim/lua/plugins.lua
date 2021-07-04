@@ -30,8 +30,8 @@ return require("packer").startup(function(use)
 
   -- LSP
   use {"neovim/nvim-lspconfig"}                           -- A collection of common configurations for Neovim's built-in language server client.
-  use {"glepnir/lspsaga.nvim"}                            -- A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
-  use {"kabouzeid/nvim-lspinstall", cmd = "LspInstall", } -- Provides the missing :LspInstall for nvim-lspconfig
+  use {"glepnir/lspsaga.nvim", cmd = "Lspsaga"}           -- A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
+  use {"kabouzeid/nvim-lspinstall", cmd = "LspInstall"}   -- Provides the missing :LspInstall for nvim-lspconfig
 
   -- Telescope
   use {"nvim-lua/popup.nvim"}
@@ -46,6 +46,7 @@ return require("packer").startup(function(use)
   -- Autocomplete
   use {
     "hrsh7th/nvim-compe",
+    event = "InsertEnter",
     config = function()
       require("plugins/nvim-compe").config()
     end

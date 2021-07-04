@@ -1,11 +1,9 @@
 -- Based on Lunarvim
 require('default-config')
+require('keymappings')
 require('autocommands')
 require('settings')
 require('plugins')
-vim.g.colors_name = 'dracula'
-vim.g.syntax = true
-require('keymappings')
 
 -- Plugins configuration
 require('plugins/nvim-treesitter')

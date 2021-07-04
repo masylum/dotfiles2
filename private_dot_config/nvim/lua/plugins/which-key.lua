@@ -35,8 +35,13 @@ require("which-key").setup {
 }
 
 -- Set leader
-vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
-vim.g.mapleader = ' '
+if O.leader_key == ' ' or O.leader_key == 'space' then
+  vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
+  vim.g.mapleader = ' '
+else
+  vim.api.nvim_set_keymap('n', O.leader_key, '<NOP>', {noremap = true, silent = true})
+  vim.g.mapleader = O.leader_key
+end
 
 local opts = {
   mode = "n", -- NORMAL mode

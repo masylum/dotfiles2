@@ -5,17 +5,20 @@ require'lspconfig'.solargraph.setup {
   handlers = {
     ["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = {spacing = 0, prefix = ""},
-        signs = true,
-        underline = true,
+        virtual_text = O.lang.ruby.diagnostics.virtual_text,
+        signs = O.lang.ruby.diagnostics.signs,
+        underline = O.lang.ruby.diagnostics.underline,
         update_in_insert = true
+
       })
   },
-  filetypes = {'rb', 'erb', 'rakefile', 'ruby'}
+  filetypes = O.lang.ruby.filetypes
 }
 
-require('utils').define_augroups({
-  _ruby_format = {
-    {'BufWritePre', '*.rb', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
-  }
-})
+if O.lang.ruby.autoformat then
+  require('lv-utils').define_augroups({
+    _ruby_format = {
+      {'BufWritePre', '*.rb', 'lua vim.lsp.buf.formatting_sync(nil,1000)'}
+    }
+  })
+end

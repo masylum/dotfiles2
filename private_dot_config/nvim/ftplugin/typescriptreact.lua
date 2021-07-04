@@ -27,9 +27,9 @@ require'lspconfig'.tsserver.setup {
   handlers = {
     ["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = {spacing = 0, prefix = ""},
-        signs = true,
-        underline = true,
+        virtual_text = O.lang.tsserver.diagnostics.virtual_text,
+        signs = O.lang.tsserver.diagnostics.signs,
+        underline = O.lang.tsserver.diagnostics.underline,
         update_in_insert = true
 
       })
@@ -38,30 +38,32 @@ require'lspconfig'.tsserver.setup {
 
 require'lsp.ts-fmt-lint'.setup()
 
-require('utils').define_augroups({
-  _javascript_autoformat = {
-    {
-      'BufWritePre', '*.js',
-      'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+if O.lang.tsserver.autoformat then
+  require('utils').define_augroups({
+    _javascript_autoformat = {
+      {
+        'BufWritePre', '*.js',
+        'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+      }
+    },
+    _javascriptreact_autoformat = {
+      {
+        'BufWritePre', '*.jsx',
+        'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+      }
+    },
+    _typescript_autoformat = {
+      {
+        'BufWritePre', '*.ts',
+        'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+      }
+    },
+    _typescriptreact_autoformat = {
+      {
+        'BufWritePre', '*.tsx',
+        'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+      }
     }
-  },
-  _javascriptreact_autoformat = {
-    {
-      'BufWritePre', '*.jsx',
-      'lua vim.lsp.buf.formatting_sync(nil, 1000)'
-    }
-  },
-  _typescript_autoformat = {
-    {
-      'BufWritePre', '*.ts',
-      'lua vim.lsp.buf.formatting_sync(nil, 1000)'
-    }
-  },
-  _typescriptreact_autoformat = {
-    {
-      'BufWritePre', '*.tsx',
-      'lua vim.lsp.buf.formatting_sync(nil, 1000)'
-    }
-  }
-})
+  })
+end
 vim.cmd("setl ts=2 sw=2")

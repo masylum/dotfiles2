@@ -29,14 +29,17 @@ require'lspconfig'.sumneko_lua.setup {
     }
   }
 }
-require('utils').define_augroups({
-  _lua_autoformat = {
-    {
-      'BufWritePre', '*.lua',
-      'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+
+if O.lang.lua.autoformat then
+  require('utils').define_augroups({
+    _lua_autoformat = {
+      {
+        'BufWritePre', '*.lua',
+        'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+      }
     }
-  }
-})
+  })
+end
 
 local lua_arguments = {}
 
@@ -50,11 +53,11 @@ local lua_fmt = {
   formatStdin = true
 }
 
--- if O.lang.lua.formatter == 'lua-format' then
+if O.lang.lua.formatter == 'lua-format' then
   table.insert(lua_arguments, luaFormat)
--- elseif O.lang.lua.formatter == 'lua-fmt' then
---   table.insert(lua_arguments, lua_fmt)
--- end
+elseif O.lang.lua.formatter == 'lua-fmt' then
+  table.insert(lua_arguments, lua_fmt)
+end
 
 require"lspconfig".efm.setup {
   -- init_options = {initializationOptions},

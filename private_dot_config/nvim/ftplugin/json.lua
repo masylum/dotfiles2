@@ -16,11 +16,13 @@ require'lspconfig'.jsonls.setup {
   }
 }
 
-require('utils').define_augroups({
-  _json_format = {
-    {
-      'BufWritePre', '*.json',
-      'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+if O.lang.json.autoformat then
+  require('lv-utils').define_augroups({
+    _json_format = {
+      {
+        'BufWritePre', '*.json',
+        'lua vim.lsp.buf.formatting_sync(nil, 1000)'
+      }
     }
-  }
-})
+  })
+end
