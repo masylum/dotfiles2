@@ -90,32 +90,25 @@ local mappings = {
     },
     l = {
         name = "LSP",
-        a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
-        A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
+        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         d = {
             "<cmd>Telescope lsp_document_diagnostics<cr>",
-            "Document Diagnostics"
+            "Document Diagnostics",
         },
-        D = {
+        w = {
             "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-            "Workspace Diagnostics"
+            "Workspace Diagnostics",
         },
-        f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
-        h = {"<cmd>Lspsaga hover_doc<cr>", "Hover Doc"},
-        i = {"<cmd>LspInfo<cr>", "Info"},
-        j = {"<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Diagnostic"},
-        k = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic"},
-        l = {"<cmd>Lspsaga lsp_finder<cr>", "LSP Finder"},
-        L = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics"},
-        p = {"<cmd>Lspsaga preview_definition<cr>", "Preview Definition"},
-        q = {"<cmd>Telescope quickfix<cr>", "Quickfix"},
-        r = {"<cmd>Lspsaga rename<cr>", "Rename"},
-        t = {"<cmd>LspTypeDefinition<cr>", "Type Definition"},
-        x = {"<cmd>cclose<cr>", "Close Quickfix"},
+        f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+        i = { "<cmd>LspInfo<cr>", "Info" },
+        j = { "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = O.lsp.popup_border}})<cr>", "Next Diagnostic" },
+        k = { "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = O.lsp.popup_border}})<cr>", "Prev Diagnostic" },
+        q = { "<cmd>Telescope quickfix<cr>", "Quickfix" },
+        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
         S = {
             "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-            "Workspace Symbols"
-        }
+            "Workspace Symbols",
+        },
     },
     s = {
         name = "Search",
@@ -149,7 +142,11 @@ mappings['d'] = {
     r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
 }
 
-vim.api.nvim_set_keymap("n", "<leader>gg", ":LazyGit<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<A-i>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<A-l>", "<C-\\><C-n><CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
 mappings["gg"] = "LazyGit"
 
 local wk = require("which-key")

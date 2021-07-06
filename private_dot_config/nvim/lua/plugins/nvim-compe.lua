@@ -26,7 +26,6 @@ M.config = function()
             nvim_lua = false,
             spell = {kind = "   (Spell)"},
             tags = false,
-            vim_dadbod_completion = true,
             emoji = {kind = " ﲃ  (Emoji)", filetypes={"markdown", "text"}}
         }
     }

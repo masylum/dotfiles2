@@ -1,5 +1,5 @@
-local execute = vim.api.nvim_command
 local fn = vim.fn
+local execute = vim.api.nvim_command
 local cmd = vim.cmd
 
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -30,8 +30,7 @@ return require("packer").startup(function(use)
 
     -- LSP
     use {"neovim/nvim-lspconfig"}                           -- A collection of common configurations for Neovim's built-in language server client.
-    use {"glepnir/lspsaga.nvim", cmd = "Lspsaga"}           -- A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
-    use {"kabouzeid/nvim-lspinstall", cmd = "LspInstall"}   -- Provides the missing :LspInstall for nvim-lspconfig
+    use {"kabouzeid/nvim-lspinstall", event = "BufRead"}    -- Provides the missing :LspInstall for nvim-lspconfig
 
     -- Telescope
     use {"nvim-lua/popup.nvim"}
@@ -40,7 +39,7 @@ return require("packer").startup(function(use)
     use {
         "nvim-telescope/telescope.nvim",
         config = [[require('plugins/telescope')]],
-        cmd = "Telescope"
+        event = "BufEnter",
     }
 
     -- Autocomplete
@@ -59,6 +58,8 @@ return require("packer").startup(function(use)
     -- Treesitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
+    -- Neoformat
+    use { "sbdchd/neoformat" }
 
     -- Gitsigns
     use {
@@ -95,6 +96,7 @@ return require("packer").startup(function(use)
 
     -- Show indent lines
     -- TODO: nvim has a bug with virtual text and horizontal scrolling
+    -- https://github.com/neovim/neovim/issues/14050
     -- use {
     --     "lukas-reineke/indent-blankline.nvim",
     --     event = "BufRead",
@@ -133,19 +135,7 @@ return require("packer").startup(function(use)
         'numToStr/FTerm.nvim',
         event = "BufRead",
         config = function()
-            require('FTerm').setup({
-                dimensions = {height = 0.8, width = 0.8, x = 0.5, y = 0.5},
-                border = 'single' -- or 'double'
-            })
-        end
-    }
-
-    -- Search & Replace
-    use {
-        'windwp/nvim-spectre',
-        event = "BufRead",
-        config = function()
-            require('spectre').setup()
+            require('plugins/FTerm').config()
         end
     }
 
@@ -155,14 +145,43 @@ return require("packer").startup(function(use)
         event = "BufRead"
     }
 
-    -- LSP Colors
-    use { "folke/lsp-colors.nvim" }
-
-    -- Lazygit
+    -- LANGUAGE SPECIFIC GOES HERE
     use {
-        "kdheepak/lazygit.nvim",
-        cmd = "LazyGit"
+        "jose-elias-alvarez/nvim-lsp-ts-utils",
+        ft = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+        },
     }
+
+    -- Autotags <div>|</div>
+    use {
+        "windwp/nvim-ts-autotag",
+        event = "InsertEnter"
+    }
+
+    -- Custom semantic text objects
+    use {
+        "nvim-treesitter/nvim-treesitter-textobjects"
+    }
+
+    -- Smart text objects
+    use {
+        "RRethy/nvim-treesitter-textsubjects"
+    }
+
+    -- Text objects using hint labels
+    use {
+        "mfussenegger/nvim-ts-hint-textobject",
+        event = "BufRead"
+    }
+
+    -- My Plugins --
+    ----------------
 
     -- Explorer
     use 'preservim/nerdtree' -- TODO: Revisit nvim-tree if it improves

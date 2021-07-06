@@ -4,6 +4,7 @@ CACHE_PATH = vim.fn.stdpath('cache')
 TERMINAL = vim.fn.expand('$TERMINAL')
 
 O = {
+    format_on_save = true,
     auto_complete = true,
     colorscheme = 'dracula',
     hidden_files = true,
@@ -21,15 +22,43 @@ O = {
     -- @usage pass a table with your desired languages
     treesitter = {
         ensure_installed = "all",
-        ignore_install = {"haskell"},
-        highlight = {enabled = true},
+        ignore_install = { "haskell" },
+        highlight = { enabled = true },
+        -- The below are for treesitter-textobjects plugin
+        textobj_prefixes = {
+            goto_next = "]", -- Go to next
+            goto_previous = "[", -- Go to previous
+            inner = "i", -- Select inside
+            outer = "a", -- Selct around
+            swap = "<leader>a", -- Swap with next
+        },
+        textobj_suffixes = {
+            -- Start and End respectively for the goto keys
+            -- for other keys it only uses the first
+            ["function"] = { "f", "F" },
+            ["class"] = { "m", "M" },
+            ["parameter"] = { "a", "A" },
+            ["block"] = { "k", "K" },
+            ["conditional"] = { "i", "I" },
+            ["call"] = { "c", "C" },
+            ["loop"] = { "l", "L" },
+            ["statement"] = { "s", "S" },
+            ["comment"] = { "/", "?" },
+        },
+        -- The below is for treesitter hint textobjects plugin
+        hint_labels = { "h", "j", "f", "d", "n", "v", "s", "l", "a" },
+    },
+
+    lsp = {
+        popup_border = "single",
+    },
+
+    user_autocommands = {
+        { "FileType", "qf", "set nobuflisted" },
     },
 
     lang = {
         lua = {
-            -- @usage can be 'lua-format'
-            formatter = '',
-            autoformat = false,
             diagnostics = {
                 virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
@@ -37,11 +66,7 @@ O = {
             }
         },
         tsserver = {
-            -- @usage can be 'eslint'
-            linter = '',
-            -- @usage can be 'prettier'
-            formatter = '',
-            autoformat = false,
+            linter = 'eslint',
             diagnostics = {
                 virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
@@ -49,9 +74,6 @@ O = {
             }
         },
         json = {
-            -- @usage can be 'prettier'
-            formatter = '',
-            autoformat = false,
             diagnostics = {
                 virtual_text = {spacing = 0, prefix = "⎨"},
                 signs = true,
@@ -74,8 +96,6 @@ O = {
         graphql = {},
         docker = {},
         css = {
-            formatter = '',
-            autoformat = false,
             virtual_text = true
         }
     }
