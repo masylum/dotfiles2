@@ -1,31 +1,14 @@
 local fn = vim.fn
-local execute = vim.api.nvim_command
-local cmd = vim.cmd
 
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local packer_bootstrap
 
 if fn.empty(fn.glob(install_path)) > 0 then
-    execute("!git clone https://github.com/wbthomason/packer.nvim " ..  install_path)
-    execute "packadd packer.nvim"
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  vim.cmd [[packadd packer.nvim]]
 end
 
-local packer_ok, packer = pcall(require, "packer")
-if not packer_ok then return end
-
-packer.init {
-    compile_path = require("packer.util").join_paths(fn.stdpath('config'), 'plugin', 'packer_compiled.vim'),
-    git = { clone_timeout = 300 },
-    display = {
-        open_fn = function()
-            return require("packer.util").float { border = "single" }
-        end
-    }
-}
-
-cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
-
 return require("packer").startup(function(use)
-    -- Packer can manage itself as an optional plugin
     use { 'wbthomason/packer.nvim' }
 
     -- LSP
@@ -52,22 +35,19 @@ return require("packer").startup(function(use)
 
     -- Snippets
     use { 'hrsh7th/vim-vsnip' }
+    use { 'hrsh7th/vim-vsnip-integ' }
     use { 'rafamadriz/friendly-snippets' }
 
     -- Treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+    use { "nvim-treesitter/nvim-treesitter-textobjects" }
+    use { "RRethy/nvim-treesitter-textsubjects" }
 
     -- Neoformat
     use { "sbdchd/neoformat" }
 
     -- Gitsigns
-    use {
-        "lewis6991/gitsigns.nvim",
-        config = function()
-            require("plugins/gitsigns").config()
-        end,
-        event = "BufRead"
-    }
+    use { 'lewis6991/gitsigns.nvim' }
 
     -- Whichkey
     use {"folke/which-key.nvim"}
@@ -94,22 +74,7 @@ return require("packer").startup(function(use)
     }
 
     -- Show indent lines
-    -- TODO: nvim has a bug with virtual text and horizontal scrolling
-    -- https://github.com/neovim/neovim/issues/14050
-    -- use {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     event = "BufRead",
-    --     setup = function()
-    --         vim.g.indentLine_enabled = 1
-    --         vim.g.indent_blankline_char = "▏"
-    --         vim.g.indent_blankline_filetype_exclude = {
-    --             "help", "terminal"
-    --         }
-    --         vim.g.indent_blankline_buftype_exclude = {"terminal"}
-    --         vim.g.indent_blankline_show_trailing_blankline_indent = false
-    --         vim.g.indent_blankline_show_first_indent_level = true
-    --     end
-    -- }
+    use { 'lukas-reineke/indent-blankline.nvim' }
 
     -- Comments in context
     use {
@@ -148,16 +113,6 @@ return require("packer").startup(function(use)
         event = "InsertEnter"
     }
 
-    -- Custom semantic text objects
-    use {
-        "nvim-treesitter/nvim-treesitter-textobjects"
-    }
-
-    -- Smart text objects
-    use {
-        "RRethy/nvim-treesitter-textsubjects"
-    }
-
     -- Text objects using hint labels
     use {
         "mfussenegger/nvim-ts-hint-textobject",
@@ -184,4 +139,10 @@ return require("packer").startup(function(use)
     use 'tpope/vim-surround' -- Use more
     use 'tpope/vim-repeat'
     use 'christoomey/vim-tmux-navigator'
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end)

@@ -2,21 +2,29 @@ local cmp = require('cmp')
 local lspkind = require('lspkind')
 
 local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 cmp.setup({
     formatting = {
-        format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+        format = lspkind.cmp_format({
+            with_text = true,
+            menu = ({
+                buffer = "[Buffer]",
+                nvim_lsp = "[LSP]",
+                luasnip = "[LuaSnip]",
+                nvim_lua = "[Lua]",
+            })
+        })
     },
     experimental = {
-      ghost_text = true,
-      native_menu = false,
+        ghost_text = true,
+        native_menu = false,
     },
     snippet = {
         -- REQUIRED - you must specify a snippet engine
@@ -59,10 +67,12 @@ cmp.setup({
         { name = 'nvim_lsp' },
         { name = 'vsnip' }, -- For vsnip users.
     },
-    {
-        { name = 'buffer' },
-    })
+        {
+            { name = 'buffer' },
+        })
 })
+
+-- TODO: Enable this and make it work?
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 -- cmp.setup.cmdline('/', {

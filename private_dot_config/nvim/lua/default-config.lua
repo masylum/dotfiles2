@@ -6,8 +6,6 @@ TERMINAL = vim.fn.expand('$TERMINAL')
 O = {
     format_on_save = true,
     auto_complete = true,
-    colorscheme = 'dracula',
-    hidden_files = true,
     wrap_lines = false,
     number = true,
     relative_number = false,
@@ -16,38 +14,7 @@ O = {
     ignore_case = true,
     smart_case = true,
     hl_search = true,
-    leader_key = "space";
-    vnsip_dir = vim.fn.stdpath('config') .. "/snippets",
-
-    -- @usage pass a table with your desired languages
-    treesitter = {
-        ensure_installed = "all",
-        ignore_install = { "haskell" },
-        highlight = { enabled = true },
-        -- The below are for treesitter-textobjects plugin
-        textobj_prefixes = {
-            goto_next = "]", -- Go to next
-            goto_previous = "[", -- Go to previous
-            inner = "i", -- Select inside
-            outer = "a", -- Selct around
-            swap = "<leader>a", -- Swap with next
-        },
-        textobj_suffixes = {
-            -- Start and End respectively for the goto keys
-            -- for other keys it only uses the first
-            ["function"] = { "f", "F" },
-            ["class"] = { "m", "M" },
-            ["parameter"] = { "a", "A" },
-            ["block"] = { "k", "K" },
-            ["conditional"] = { "i", "I" },
-            ["call"] = { "c", "C" },
-            ["loop"] = { "l", "L" },
-            ["statement"] = { "s", "S" },
-            ["comment"] = { "/", "?" },
-        },
-        -- The below is for treesitter hint textobjects plugin
-        hint_labels = { "h", "j", "f", "d", "n", "v", "s", "l", "a" },
-    },
+    leader_key = "space",
 
     lsp = {
         popup_border = "single",

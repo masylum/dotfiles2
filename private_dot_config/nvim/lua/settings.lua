@@ -10,7 +10,7 @@ cmd('set iskeyword+=-')                 -- treat dash as a separate word
 cmd('set synmaxcol=200')                -- Limits the syntax highlighting
 
 --- COLORSCHEME ---
-vim.g.colors_name = O.colorscheme
+vim.g.colors_name = 'dracula'
 vim.g.syntax = true
 
 -- SETTINGS
@@ -22,7 +22,7 @@ opt.completeopt     = {'menu', 'menuone', 'noselect'}
 opt.conceallevel    = 0                         -- so that `` is visible in markdown files
 opt.fileencoding    = "utf-8"                   -- the encoding written to a file
 opt.guifont         = "JetBrains Mono Nerd Font Complete:h14"
-opt.hidden          = O.hidden_files            -- required to keep multiple buffers and open multiple buffers
+opt.hidden          = true                      -- required to keep multiple buffers and open multiple buffers
 opt.hlsearch        = O.hl_search               -- highlight all matches on previous search pattern
 opt.ignorecase      = O.ignore_case             -- ignore case in search patterns
 opt.mouse           = "a"                       -- allow the mouse to be used in neovim

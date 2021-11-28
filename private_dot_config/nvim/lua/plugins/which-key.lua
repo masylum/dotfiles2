@@ -34,14 +34,8 @@ require("which-key").setup {
     show_help = true -- show help message on the command line when the popup is visible
 }
 
--- Set leader
-if O.leader_key == ' ' or O.leader_key == 'space' then
-    vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
-    vim.g.mapleader = ' '
-else
-    vim.api.nvim_set_keymap('n', O.leader_key, '<NOP>', {noremap = true, silent = true})
-    vim.g.mapleader = O.leader_key
-end
+vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
+vim.g.mapleader = ' '
 
 local opts = {
     mode = "n", -- NORMAL mode
@@ -65,8 +59,6 @@ vim.api.nvim_set_keymap('n', '<Leader>f', ':NERDTreeFind<CR>', {noremap = true, 
 
 -- Close buffer
 vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete<CR>", {noremap = true, silent = true})
-
--- TODO create entire treesitter section
 
 local mappings = {
     ["/"] = "Comment",
@@ -118,18 +110,6 @@ local mappings = {
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         t = {"<cmd>Telescope live_grep<cr>", "Text"}
     },
-    T = {
-        name = "Treesitter",
-        i = {":TSConfigInfo<cr>", "Info"}
-    }
-}
-
-mappings['r'] = {
-    name = "Replace",
-    f = {
-        "<cmd>lua require('spectre').open_file_search()<cr>", "Current File"
-    },
-    p = {"<cmd>lua require('spectre').open()<cr>", "Project"}
 }
 
 mappings['d'] = {
@@ -141,13 +121,6 @@ mappings['d'] = {
     l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
     r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
 }
-
-vim.api.nvim_set_keymap("n", "<leader>gg", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<A-i>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<A-l>", "<C-\\><C-n><CMD>lua _G.__fterm_lazygit()<CR>", { noremap = true, silent = true })
-mappings["gg"] = "LazyGit"
 
 local wk = require("which-key")
 wk.register(mappings, opts)

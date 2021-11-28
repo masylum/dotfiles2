@@ -12,5 +12,7 @@ require('plugins/lualine')
 require('plugins/nerdtree')
 require('plugins/tmux-navigator')
 require('plugins/nvim-comp')
+require('plugins/indent-blankline')
+require('plugins/gitsigns')
 
 require('lsp')
