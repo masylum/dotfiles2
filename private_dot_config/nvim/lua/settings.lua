@@ -1,10 +1,8 @@
 ---  HELPERS  ---
-
 local cmd = vim.cmd
 local opt = vim.opt
 
 ---  VIM ONLY COMMANDS  ---
-
 cmd('filetype plugin on')               -- filetype detection
 cmd('let &titleold="' .. TERMINAL .. '"')
 cmd('set inccommand=nosplit')           -- show what you are substituting in real time
@@ -16,12 +14,11 @@ vim.g.colors_name = O.colorscheme
 vim.g.syntax = true
 
 -- SETTINGS
-
 opt.backup          = false                     -- creates a backup file
 -- opt.clipboard       = "unnamedplus"          -- allows neovim to access the system clipboard
 opt.cmdheight       = 2                         -- more space in the neovim command line for displaying messages
 opt.colorcolumn     = "99999"                   -- fix indentline for now
-opt.completeopt     = {'menuone', 'noselect'}
+opt.completeopt     = {'menu', 'menuone', 'noselect'}
 opt.conceallevel    = 0                         -- so that `` is visible in markdown files
 opt.fileencoding    = "utf-8"                   -- the encoding written to a file
 opt.guifont         = "JetBrains Mono Nerd Font Complete:h14"
@@ -56,7 +53,7 @@ opt.signcolumn      = "yes"                     -- always show the sign column, 
 opt.wrap            = O.wrap_lines              -- display lines as one long line
 
 -- CUSTOM
--- TODO: Port to LunarVim
+-- TODO: Port to lua
 cmd('set wildmode=list:longest,list:full') -- Show menu with possible tab competions
 cmd('set wildignore+=.git,.svn')
 cmd('set wildignore+=*.o,*.obj,*.jpg,*.png,*.gif,*.log,*.gz,*.bin,*.gem,*.rbc,*.class')

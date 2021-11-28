@@ -41,6 +41,3 @@ vim.api.nvim_set_keymap('x', '<A-k>', ':m \'<-2<CR>gv-gv', {noremap = true, sile
 -- Better nav for omnicomplete
 vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
 vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')
-
--- Toggle the QuickFix window
-vim.api.nvim_set_keymap('', '<C-q>', ':call QuickFixToggle()<CR>', {noremap = true, silent = true})

@@ -1,23 +1,3 @@
--- TODO refacor this whole file and treesitter in general
--- if not package.loaded['nvim-treesitter'] then return end
---
--- Custom parsers
--- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
--- parser_config.make = {
---     install_info = {
---         url = "https://github.com/alemuller/tree-sitter-make", -- local path or git repo
---         files = {"src/parser.c"},
---         requires_generate_from_grammar = true
---     }
--- }
--- parser_config.just = {
---     install_info = {
---         url = "~/dev/tree-sitter-just", -- local path or git repo
---         files = {"src/parser.c"}
---     }
---     -- filetype = "just", -- if filetype does not agrees with parser name
---     -- used_by = {"bar", "baz"} -- additional filetypes that use this parser
--- }
 -- Custom text objects
 local textobj_prefixes = O.treesitter.textobj_prefixes
 local textobj_suffixes = O.treesitter.textobj_suffixes

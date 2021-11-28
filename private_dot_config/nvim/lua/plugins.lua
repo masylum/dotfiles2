@@ -26,37 +26,36 @@ cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there 
 
 return require("packer").startup(function(use)
     -- Packer can manage itself as an optional plugin
-    use 'wbthomason/packer.nvim'
+    use { 'wbthomason/packer.nvim' }
 
     -- LSP
-    use {"neovim/nvim-lspconfig"}                           -- A collection of common configurations for Neovim's built-in language server client.
-    use {"kabouzeid/nvim-lspinstall", event = "BufRead"}    -- Provides the missing :LspInstall for nvim-lspconfig
+    use { "neovim/nvim-lspconfig" }                           -- A collection of common configurations for Neovim's built-in language server client.
+    use { "kabouzeid/nvim-lspinstall", event = "BufRead" }    -- Provides the missing :LspInstall for nvim-lspconfig
 
     -- Telescope
-    use {"nvim-lua/popup.nvim"}
-    use {"nvim-lua/plenary.nvim"}
-    use {"tjdevries/astronauta.nvim"}
+    use { "nvim-lua/popup.nvim" }
+    use { "nvim-lua/plenary.nvim" }
     use {
         "nvim-telescope/telescope.nvim",
         config = [[require('plugins/telescope')]],
         event = "BufEnter",
     }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Autocomplete
-    use {
-        "hrsh7th/nvim-compe",
-        event = "InsertEnter",
-        config = function()
-            require("plugins/nvim-compe").config()
-        end
-    }
+    use { 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/cmp-path' }
+    use { 'hrsh7th/cmp-nvim-lsp' }
+    use { 'hrsh7th/cmp-buffer' }
+    use { 'hrsh7th/cmp-vsnip' }
+    use { 'onsails/lspkind-nvim' }
 
     -- Snippets
-    use {"hrsh7th/vim-vsnip", event = "InsertEnter"}
-    use {"rafamadriz/friendly-snippets", event = "InsertEnter"}
+    use { 'hrsh7th/vim-vsnip' }
+    use { 'rafamadriz/friendly-snippets' }
 
     -- Treesitter
-    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
     -- Neoformat
     use { "sbdchd/neoformat" }
@@ -127,21 +126,6 @@ return require("packer").startup(function(use)
     -- Better quickfix
     use {
         "kevinhwang91/nvim-bqf",
-        event = "BufRead"
-    }
-
-    -- Floating terminal
-    use {
-        'numToStr/FTerm.nvim',
-        event = "BufRead",
-        config = function()
-            require('plugins/FTerm').config()
-        end
-    }
-
-    -- Use fzy for telescope
-    use {
-        "nvim-telescope/telescope-fzy-native.nvim",
         event = "BufRead"
     }
 
