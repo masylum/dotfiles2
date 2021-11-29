@@ -1,14 +1,11 @@
 local actions = require('telescope.actions')
 local sorters = require('telescope.sorters')
-local previewers = require('telescope.previewers')
-
-require('telescope').load_extension('fzf')
 
 -- Global remapping
 ------------------------------
 require('telescope').setup {
     defaults = {
-        prompt_prefix = " ",
+        prompt_prefix = "🔍 ",
         selection_caret = " ",
         entry_prefix = "  ",
         initial_mode = "insert",
@@ -19,21 +16,10 @@ require('telescope').setup {
             width = 0.75,
             prompt_position = "bottom",
             preview_cutoff = 120,
-            horizontal = {mirror = false},
-            vertical = {mirror = false}
-        },
-        vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-            "--hidden",
+            horizontal = { mirror = false },
+            vertical = { mirror = false }
         },
         file_sorter = sorters.get_fzy_sorter,
-        generic_sorter = sorters.get_generic_fuzzy_sorter,
         file_ignore_patterns = {},
         path_display = { shorten = 5 },
         winblend = 0,
@@ -42,19 +28,12 @@ require('telescope').setup {
         color_devicons = true,
         set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
         pickers = {
-            find_files = {
-                find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
-                theme = "ivy",
-            },
+            find_files = { theme = "ivy" },
             live_grep = {
                 --@usage don't include the filename in the search results
                 only_sort_text = true,
             },
         },
-        file_previewer = previewers.vim_buffer_cat.new,
-        grep_previewer = previewers.vim_buffer_vimgrep.new,
-        qflist_previewer = previewers.vim_buffer_qflist.new,
-        buffer_previewer_maker = previewers.buffer_previewer_maker,
         mappings = {
             i = {
                 ["<C-c>"] = actions.close,
@@ -79,3 +58,5 @@ require('telescope').setup {
         }
     }
 }
+
+require('telescope').load_extension('fzf')

@@ -47,18 +47,18 @@ local opts = {
 }
 
 -- Comments
-vim.api.nvim_set_keymap("n", "<leader>/", ":CommentToggle<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>/", ":CommentToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>/", ":CommentToggle<CR>", { noremap = true, silent = true })
 
 -- No Highlights
-vim.api.nvim_set_keymap('n', '<Leader>h', ':let @/=""<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>h', ':let @/=""<CR>', { noremap = true, silent = true })
 
 -- NerdTree
-vim.api.nvim_set_keymap('n', '<Leader>n', ":NERDTreeToggle<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<Leader>f', ':NERDTreeFind<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>n', ":NERDTreeToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>f', ':NERDTreeFind<CR>', { noremap = true, silent = true })
 
 -- Close buffer
-vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete<CR>", { noremap = true, silent = true })
 
 local mappings = {
     ["/"] = "Comment",
@@ -105,7 +105,7 @@ local mappings = {
     s = {
         name = "Search",
         b = {"<cmd>Telescope buffers<cr>", "Find buffer"},
-        f = {"<cmd>Telescope find_files<cr>", "Find File"},
+        f = {"<cmd>Telescope git_files<cr>", "Find File"},
         r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         t = {"<cmd>Telescope live_grep<cr>", "Text"}
