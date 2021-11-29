@@ -10,7 +10,7 @@ cmd('set iskeyword+=-')                 -- treat dash as a separate word
 cmd('set synmaxcol=200')                -- Limits the syntax highlighting
 
 --- COLORSCHEME ---
-vim.g.colors_name = 'dracula'
+vim.g.color_name = 'dracula'
 vim.g.syntax = true
 
 -- SETTINGS
