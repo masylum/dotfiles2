@@ -10,7 +10,9 @@ cmd('set iskeyword+=-')                 -- treat dash as a separate word
 cmd('set synmaxcol=200')                -- Limits the syntax highlighting
 
 --- COLORSCHEME ---
-vim.g.color_name = 'dracula'
+vim.o.termguicolors = true
+vim.o.background = 'dark'
+vim.g.color_name = 'onenord'
 vim.g.syntax = true
 
 -- SETTINGS
@@ -34,7 +36,6 @@ opt.smartindent     = true                      -- make indenting smarter again
 -- opt.splitbelow   = true                      -- force all horizontal splits to go below current window
 -- opt.splitright   = true                      -- force all vertical splits to go to the right of current window
 opt.swapfile        = false                     -- creates a swapfile
-opt.termguicolors   = true                      -- set term gui colors (most terminals support this)
 opt.timeoutlen      = O.timeoutlen              -- time to wait for a mapped sequence to complete (in milliseconds)
 opt.title           = true                      -- set the title of window to the value of the titlestring
 opt.titlestring     = "%<%F%=%l/%L - nvim"      -- what the title of the window will be set to

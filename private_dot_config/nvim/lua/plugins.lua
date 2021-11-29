@@ -125,7 +125,8 @@ return require("packer").startup(function(use)
     use 'preservim/nerdtree' -- TODO: Revisit nvim-tree if it improves
 
     -- Color
-    use { 'dracula/vim', as = 'dracula' }
+    use { 'rmehri01/onenord.nvim' }
+    use { 'matsuuu/pinkmare' }
 
     -- Status Line and Bufferline
     use { "hoob3rt/lualine.nvim" }

@@ -2,8 +2,11 @@
 require('default-config')
 require('keymappings')
 require('autocommands')
-require('settings')
 require('plugins')
+require('settings')
+
+-- Themes
+require('onenord').setup()
 
 -- Plugins configuration
 require('plugins/nvim-treesitter')
