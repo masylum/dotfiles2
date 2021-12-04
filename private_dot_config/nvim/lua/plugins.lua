@@ -12,8 +12,13 @@ return require("packer").startup(function(use)
     use { 'wbthomason/packer.nvim' }
 
     -- LSP
-    use { "neovim/nvim-lspconfig" }                           -- A collection of common configurations for Neovim's built-in language server client.
-    use { "kabouzeid/nvim-lspinstall", event = "BufRead" }    -- Provides the missing :LspInstall for nvim-lspconfig
+    use {
+        "neovim/nvim-lspconfig",             -- A collection of common configurations for Neovim's built-in language server client.
+        'williamboman/nvim-lsp-installer'    -- Provides the missing :LspInstall for nvim-lspconfig
+    }
+
+    -- Illuminate
+    use { 'RRethy/vim-illuminate' }          -- Illuminates current word in the document
 
     -- Telescope
     use { "nvim-lua/popup.nvim" }
@@ -93,18 +98,10 @@ return require("packer").startup(function(use)
         event = "BufRead"
     }
 
-    -- LANGUAGE SPECIFIC GOES HERE
-    use {
-        "jose-elias-alvarez/nvim-lsp-ts-utils",
-        ft = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-            "typescript",
-            "typescriptreact",
-            "typescript.tsx",
-        },
-    }
+    -- LSP addons
+    use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
+    use { 'jose-elias-alvarez/null-ls.nvim' }
+    use { 'b0o/schemastore.nvim' }
 
     -- Autotags <div>|</div>
     use {
@@ -117,9 +114,6 @@ return require("packer").startup(function(use)
         "mfussenegger/nvim-ts-hint-textobject",
         event = "BufRead"
     }
-
-    -- My Plugins --
-    ----------------
 
     -- Explorer
     use 'preservim/nerdtree' -- TODO: Revisit nvim-tree if it improves

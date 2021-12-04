@@ -17,26 +17,24 @@ vim.g.syntax = true
 
 -- SETTINGS
 opt.backup          = false                     -- creates a backup file
--- opt.clipboard       = "unnamedplus"          -- allows neovim to access the system clipboard
-opt.cmdheight       = 2                         -- more space in the neovim command line for displaying messages
+opt.cmdheight       = 1                         -- more space in the neovim command line for displaying messages
 opt.colorcolumn     = "99999"                   -- fix indentline for now
-opt.completeopt     = {'menu', 'menuone', 'noselect'}
+opt.completeopt     = { 'menu', 'menuone' }     -- TODO: Test
 opt.conceallevel    = 0                         -- so that `` is visible in markdown files
 opt.fileencoding    = "utf-8"                   -- the encoding written to a file
 opt.guifont         = "JetBrains Mono Nerd Font Complete:h14"
 opt.hidden          = true                      -- required to keep multiple buffers and open multiple buffers
-opt.hlsearch        = O.hl_search               -- highlight all matches on previous search pattern
-opt.ignorecase      = O.ignore_case             -- ignore case in search patterns
+opt.hlsearch        = true                      -- highlight all matches on previous search pattern
+opt.ignorecase      = true                      -- ignore case in search patterns
 opt.mouse           = "a"                       -- allow the mouse to be used in neovim
 opt.pumheight       = 10                        -- pop up menu height
+opt.showcmd         = false                     -- show the number of lines selected
 opt.showmode        = false                     -- we don't need to see things like -- INSERT -- anymore
 opt.showtabline     = 2                         -- always show tabs
-opt.smartcase       = O.smart_case              -- smart case
+opt.smartcase       = true                      -- smart case
 opt.smartindent     = true                      -- make indenting smarter again
--- opt.splitbelow   = true                      -- force all horizontal splits to go below current window
--- opt.splitright   = true                      -- force all vertical splits to go to the right of current window
 opt.swapfile        = false                     -- creates a swapfile
-opt.timeoutlen      = O.timeoutlen              -- time to wait for a mapped sequence to complete (in milliseconds)
+opt.timeoutlen      = 100                       -- time to wait for a mapped sequence to complete (in milliseconds)
 opt.title           = true                      -- set the title of window to the value of the titlestring
 opt.titlestring     = "%<%F%=%l/%L - nvim"      -- what the title of the window will be set to
 opt.undodir         = CACHE_PATH .. '/undo'     -- set an undo directory
@@ -47,11 +45,13 @@ opt.expandtab       = true                      -- convert tabs to spaces
 opt.shiftwidth      = 4                         -- the number of spaces inserted for each indentation
 opt.shortmess:append("c")                       -- don't pass messages to |ins-completion-menu|
 opt.tabstop         = 4                         -- insert 4 spaces for a tab
-opt.cursorline      = O.cursorline              -- highlight the current line
-opt.number          = O.number                  -- set numbered lines
-opt.relativenumber  = O.relative_number         -- set relative numbered lines
+opt.cursorline      = true                      -- highlight the current line
+opt.number          = true                      -- set numbered lines
+opt.relativenumber  = false                     -- set relative numbered lines
 opt.signcolumn      = "yes"                     -- always show the sign column, otherwise it would shift the text each time
-opt.wrap            = O.wrap_lines              -- display lines as one long line
+opt.wrap            = false                     -- display lines as one long line
+opt.scrolloff       = 4                         -- number of lines before scrolling
+opt.sidescrolloff   = 2                         -- number of cols before scrolling
 
 -- CUSTOM
 -- TODO: Port to lua
@@ -62,4 +62,3 @@ cmd('set wildignore+=*.min.js,**/node_modules/**,**/images/**')
 cmd('set wildignore+=**/assets/**/original/**,**/assets/**/thumb/**,**/assets/**/small/**')
 cmd('set wildignore+=tmp,public,vendor/bundle/*,vendor/cache/*,test/fixtures/*,vendor/gems/*,spec/cov,a/*')
 cmd('set wildignore+=sorbet/*')
-O.document_highlight = true
