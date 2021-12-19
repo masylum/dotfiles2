@@ -9,6 +9,9 @@ source ~/.config/bash/prompt.bash
 # TODO: template?
 eval $(/opt/homebrew/bin/brew shellenv)
 
+# cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # Set the editor and git editor
 export EDITOR=nvim
 
