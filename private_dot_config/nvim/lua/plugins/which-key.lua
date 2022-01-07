@@ -26,9 +26,9 @@ require("which-key").setup({
 		padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
 	},
 	layout = {
-		height = { min = 5, max = 25 }, -- min and max height of the columns
-		width = { min = 20, max = 70 }, -- min and max width of the columns
-		spacing = 5, -- spacing between columns
+		height = { min = 2, max = 25 }, -- min and max height of the columns
+		width = { min = 10, max = 70 }, -- min and max width of the columns
+		spacing = 3, -- spacing between columns
 	},
 	hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
 	show_help = true, -- show help message on the command line when the popup is visible
@@ -46,21 +46,17 @@ local opts = {
 	nowait = false, -- use `nowait` when creating keymaps
 }
 
--- No Highlights
-vim.api.nvim_set_keymap("n", "<Leader>h", ':let @/=""<CR>', { noremap = true, silent = true })
-
 -- NerdTree
 vim.api.nvim_set_keymap("n", "<Leader>n", ":NERDTreeToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>f", ":NERDTreeFind<CR>", { noremap = true, silent = true })
 
--- Close buffer
-vim.api.nvim_set_keymap("n", "<leader>c", ":bdelete<CR>", { noremap = true, silent = true })
+-- No Highlights
+vim.api.nvim_set_keymap("n", "<Leader>h", ':let @/=""<CR>', { noremap = true, silent = true })
 
 local mappings = {
-	["c"] = "Close Buffer",
-	["n"] = "NerdTree",
-	["f"] = "Find File",
-	["h"] = "No Highlight",
+	n = "NerdTree",
+	f = "Find File",
+	h = "No Highlight",
 
 	g = {
 		name = "Git",
@@ -87,13 +83,12 @@ local mappings = {
 		f = { "<cmd>Telescope git_files<cr>", "Find File" },
 		t = { "<cmd>Telescope live_grep<cr>", "Text" },
 	},
-}
-
-mappings["d"] = {
-	name = "Diagnostics",
-	t = { "<cmd>TroubleToggle<cr>", "trouble" },
-	w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
-	d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+	d = {
+		name = "Diagnostics",
+		a = { "<cmd>LspDiagQuickfix<cr>", "Current line" },
+		t = { "<cmd>TroubleToggle<cr>", "Trouble" },
+		w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace" },
+	},
 }
 
 local wk = require("which-key")

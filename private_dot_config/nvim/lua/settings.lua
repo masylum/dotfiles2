@@ -7,12 +7,13 @@ cmd("filetype plugin on") -- filetype detection
 cmd("set inccommand=nosplit") -- show what you are substituting in real time
 cmd("set iskeyword+=-") -- treat dash as a separate word
 cmd("set synmaxcol=200") -- Limits the syntax highlighting
+cmd("setl ts=2 sw=2") -- Set the indentation as 2 spaces by default
 
 --- COLORSCHEME ---
 vim.o.termguicolors = true
 vim.o.background = "dark"
-vim.g.color_name = "onenord"
 vim.g.syntax = true
+vim.cmd([[colorscheme catppuccin]])
 
 -- SETTINGS
 opt.backup = false -- creates a backup file

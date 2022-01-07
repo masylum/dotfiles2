@@ -5,7 +5,7 @@ require("plugins")
 require("settings")
 
 -- Themes
-require("onenord").setup()
+require("plugins/catppuccin")
 
 -- Plugins configuration
 require("plugins/nvim-treesitter")

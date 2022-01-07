@@ -14,4 +14,8 @@ require("utils").define_augroups({
 		-- Auto compile when there are changes in plugins.lua
 		{ "BufWritePost", "plugins.lua", "PackerCompile" },
 	},
+	_resize = {
+		-- Automatically rebalance windows on vim resize (added because tmux)
+		{ "VimResized", "*", ":wincmd =" },
+	},
 })

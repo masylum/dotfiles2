@@ -33,12 +33,10 @@ local on_attach = function(client, bufnr)
 	u.buf_map("n", "K", ":LspHover<CR>", nil, bufnr)
 	u.buf_map("n", "[a", ":LspDiagPrev<CR>", nil, bufnr)
 	u.buf_map("n", "]a", ":LspDiagNext<CR>", nil, bufnr)
-	u.buf_map("n", "<Leader>a", ":LspDiagLine<CR>", nil, bufnr)
-	u.buf_map("n", "<Leader>q", ":LspDiagQuickfix<CR>", nil, bufnr)
 
-	-- if client.resolved_capabilities.document_formatting then
-	-- 	vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-	-- end
+	if client.resolved_capabilities.document_formatting then
+		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+	end
 
 	require("illuminate").on_attach(client)
 end

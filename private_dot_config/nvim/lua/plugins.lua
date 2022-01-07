@@ -68,6 +68,9 @@ return require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-cmdline" }) -- cmdline completions
 	use({ "onsails/lspkind-nvim" })
 
+	-- Autopairs
+	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
+
 	-- Snippets
 	use({ "hrsh7th/vim-vsnip" })
 	use({ "hrsh7th/vim-vsnip-integ" })
@@ -76,7 +79,6 @@ return require("packer").startup(function(use)
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use({ "nvim-treesitter/nvim-treesitter-textobjects" })
-	use({ "RRethy/nvim-treesitter-textsubjects" })
 
 	-- Neoformat
 	use({ "sbdchd/neoformat" })
@@ -142,8 +144,7 @@ return require("packer").startup(function(use)
 	use("preservim/nerdtree") -- TODO: Revisit nvim-tree if it improves
 
 	-- Color
-	use({ "rmehri01/onenord.nvim" })
-	use({ "matsuuu/pinkmare" })
+	use({ "catppuccin/nvim", as = "catppuccin" })
 
 	-- Status Line and Bufferline
 	use({ "hoob3rt/lualine.nvim" })
