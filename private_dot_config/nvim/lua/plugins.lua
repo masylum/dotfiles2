@@ -56,11 +56,19 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
+		config = function()
+			require("plugins/telescope")
+		end,
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 	-- Autocomplete
-	use({ "hrsh7th/nvim-cmp" })
+	use({
+		"hrsh7th/nvim-cmp",
+		config = function()
+			require("plugins/nvim-cmp")
+		end,
+	})
 	use({ "hrsh7th/cmp-path" })
 	use({ "hrsh7th/cmp-nvim-lsp" })
 	use({ "hrsh7th/cmp-buffer" })
@@ -69,7 +77,12 @@ return require("packer").startup(function(use)
 	use({ "onsails/lspkind-nvim" })
 
 	-- Autopairs
-	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("plugins/autopairs")
+		end,
+	})
 
 	-- Snippets
 	use({ "hrsh7th/vim-vsnip" })
@@ -77,17 +90,33 @@ return require("packer").startup(function(use)
 	use({ "rafamadriz/friendly-snippets" })
 
 	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = function()
+			require("plugins/nvim-treesitter")
+		end,
+	})
 	use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
 	-- Neoformat
 	use({ "sbdchd/neoformat" })
 
 	-- Gitsigns
-	use({ "lewis6991/gitsigns.nvim" })
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("plugins/gitsigns")
+		end,
+	})
 
 	-- Whichkey
-	use({ "folke/which-key.nvim" })
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("plugins/which-key")
+		end,
+	})
 
 	-- Comments
 	use({
@@ -105,17 +134,26 @@ return require("packer").startup(function(use)
 		"andymass/vim-matchup",
 		event = "CursorMoved",
 		config = function()
-			require("plugins/matchup").config()
+			require("plugins/matchup")
 		end,
 	})
 
 	-- Show indent lines
-	use({ "lukas-reineke/indent-blankline.nvim" })
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("plugins/indent-blankline")
+		end,
+	})
 
 	-- Diagnostics
 	use({
 		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
 		cmd = "TroubleToggle",
+		config = function()
+			require("plugins/trouble")
+		end,
 	})
 
 	-- Better quickfix
@@ -141,13 +179,29 @@ return require("packer").startup(function(use)
 	})
 
 	-- Explorer
-	use("preservim/nerdtree") -- TODO: Revisit nvim-tree if it improves
+	use({
+		"preservim/nerdtree",
+		config = function()
+			require("plugins/nerdtree")
+		end,
+	}) -- TODO: Revisit nvim-tree if it improves
 
 	-- Color
-	use({ "catppuccin/nvim", as = "catppuccin" })
+	use({
+		"catppuccin/nvim",
+		as = "catppuccin",
+		config = function()
+			require("plugins/catppuccin")
+		end,
+	})
 
 	-- Status Line and Bufferline
-	use({ "hoob3rt/lualine.nvim" })
+	use({
+		"hoob3rt/lualine.nvim",
+		config = function()
+			require("plugins/lualine")
+		end,
+	})
 
 	-- Git
 	use("tpope/vim-fugitive")
@@ -156,7 +210,12 @@ return require("packer").startup(function(use)
 	use("tommcdo/vim-exchange") -- TODO: Practice
 	use("tpope/vim-surround") -- Use more
 	use("tpope/vim-repeat")
-	use("christoomey/vim-tmux-navigator")
+	use({
+		"christoomey/vim-tmux-navigator",
+		config = function()
+			require("plugins/tmux-navigator")
+		end,
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

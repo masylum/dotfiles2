@@ -31,7 +31,7 @@ M.lua_command = function(name, fn)
 	M.command(name, "lua " .. fn)
 end
 
-M.buf_map = function(mode, target, source, opts, bufnr)
+M.buf_map = function(bufnr, mode, target, source, opts)
 	api.nvim_buf_set_keymap(bufnr or 0, mode, target, source, get_map_options(opts))
 end
 

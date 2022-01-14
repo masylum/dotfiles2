@@ -7,7 +7,6 @@ cmd("filetype plugin on") -- filetype detection
 cmd("set inccommand=nosplit") -- show what you are substituting in real time
 cmd("set iskeyword+=-") -- treat dash as a separate word
 cmd("set synmaxcol=200") -- Limits the syntax highlighting
-cmd("setl ts=2 sw=2") -- Set the indentation as 2 spaces by default
 
 --- COLORSCHEME ---
 vim.o.termguicolors = true
@@ -30,7 +29,7 @@ opt.mouse = "a" -- allow the mouse to be used in neovim
 opt.pumheight = 10 -- pop up menu height
 opt.showcmd = false -- show the number of lines selected
 opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
-opt.showtabline = 2 -- always show tabs
+opt.showtabline = 1 -- always show tabs
 opt.smartcase = true -- smart case
 opt.smartindent = true -- make indenting smarter again
 opt.swapfile = false -- creates a swapfile
@@ -40,10 +39,14 @@ opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be s
 opt.undofile = true -- enable persisten undo
 opt.updatetime = 300 -- faster completion
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-opt.expandtab = true -- convert tabs to spaces
-opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 opt.shortmess:append("c") -- don't pass messages to |ins-completion-menu|
-opt.tabstop = 4 -- insert 4 spaces for a tab
+
+-- Tabs and spaces: Overwritte in ftplugins
+opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
+opt.tabstop = 2 -- insert 2 spaces for a tab
+opt.softtabstop = 2 -- TODO: document
+opt.expandtab = true -- convert tabs to spaces
+
 opt.cursorline = true -- highlight the current line
 opt.number = true -- set numbered lines
 opt.relativenumber = false -- set relative numbered lines

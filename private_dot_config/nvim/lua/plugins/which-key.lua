@@ -85,9 +85,8 @@ local mappings = {
 	},
 	d = {
 		name = "Diagnostics",
-		a = { "<cmd>LspDiagQuickfix<cr>", "Current line" },
-		t = { "<cmd>TroubleToggle<cr>", "Trouble" },
-		w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace" },
+		a = { "<cmd>LspDiagLine<cr>", "Current line" },
+		d = { "<cmd>TroubleToggle<cr>", "Trouble" },
 	},
 }
 
