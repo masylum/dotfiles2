@@ -203,6 +203,9 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Copilot
+	use("github/copilot.vim")
+
 	-- Git
 	use("tpope/vim-fugitive")
 
