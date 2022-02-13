@@ -65,7 +65,7 @@ lsp_installer.on_server_ready(function(server)
 
 	local status_ok, config = pcall(require, "lsp.clients." .. server.name)
 	if status_ok then
-		client_ops = config.get_ops()
+		client_ops = config.get_ops(on_attach)
 	end
 
 	server:setup(vim.tbl_deep_extend("force", opts, client_ops))
