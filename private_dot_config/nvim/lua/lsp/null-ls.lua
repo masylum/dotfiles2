@@ -19,7 +19,7 @@ local sources = {
 	b.formatting.shfmt,
 	b.formatting.stylua,
 	b.formatting.trim_whitespace.with({ filetypes = { "tmux", "zsh" } }),
-	b.formatting.rubocop,
+	-- b.formatting.rubocop,
 	b.formatting.terraform_fmt,
 }
 

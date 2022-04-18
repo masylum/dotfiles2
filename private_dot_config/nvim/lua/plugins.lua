@@ -48,19 +48,26 @@ return require("packer").startup(function(use)
 	})
 
 	-- Illuminate
-	use({ "RRethy/vim-illuminate" }) -- Illuminates current word in the document
+	use({
+		"RRethy/vim-illuminate",
+		config = function()
+			require("plugins/vim-illuminate")
+		end,
+	}) -- Illuminates current word in the document
 
-	-- Telescope
+	-- General dependencies
 	use({ "nvim-lua/popup.nvim" })
 	use({ "nvim-lua/plenary.nvim" })
+
+	-- Fuzzy finder
+	use({ "junegunn/fzf", run = "./install --all" })
 	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		"ibhagwan/fzf-lua",
+		requires = { "kyazdani42/nvim-web-devicons" },
 		config = function()
-			require("plugins/telescope")
+			require("plugins/fzf")
 		end,
 	})
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 	-- Autocomplete
 	use({
@@ -73,16 +80,8 @@ return require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-nvim-lsp" })
 	use({ "hrsh7th/cmp-buffer" })
 	use({ "hrsh7th/cmp-vsnip" })
-	use({ "hrsh7th/cmp-cmdline" }) -- cmdline completions
+	use({ "hrsh7th/cmp-cmdline" })
 	use({ "onsails/lspkind-nvim" })
-
-	-- Autopairs
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("plugins/autopairs")
-		end,
-	})
 
 	-- Snippets
 	use({ "hrsh7th/vim-vsnip" })
@@ -128,15 +127,6 @@ return require("packer").startup(function(use)
 
 	-- Icons
 	use({ "kyazdani42/nvim-web-devicons" })
-
-	-- Matchup
-	use({
-		"andymass/vim-matchup",
-		event = "CursorMoved",
-		config = function()
-			require("plugins/matchup")
-		end,
-	})
 
 	-- Show indent lines
 	use({
@@ -195,7 +185,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Status Line and Bufferline
+	-- Status Line
 	use({
 		"hoob3rt/lualine.nvim",
 		config = function()
@@ -204,7 +194,12 @@ return require("packer").startup(function(use)
 	})
 
 	-- Copilot
-	use("github/copilot.vim")
+	use({
+		"github/copilot.vim",
+		config = function()
+			require("plugins/copilot")
+		end,
+	})
 
 	-- Git
 	use("tpope/vim-fugitive")

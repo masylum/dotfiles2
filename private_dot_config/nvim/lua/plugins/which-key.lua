@@ -62,31 +62,31 @@ local mappings = {
 		name = "Git",
 		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
 		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-		l = { "<cmd>Git Blame<cr>", "Blame" },
-		s = { "<cmd>Telescope git_status<cr>", "Git status" },
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-		C = {
-			"<cmd>Telescope git_bcommits<cr>",
-			"Checkout commit(for current file)",
-		},
+		b = { "<cmd>Git Blame<cr>", "Blame" },
 	},
+
 	l = {
 		name = "LSP",
-		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+		a = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+		d = { "<cmd>TroubleToggle lsp_definitions<cr>", "Definitions" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
 	},
+
 	s = {
 		name = "Search",
-		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
-		f = { "<cmd>Telescope git_files<cr>", "Find File" },
-		t = { "<cmd>Telescope live_grep<cr>", "Text" },
+		f = { "<cmd>FzfLua files<cr>", "Find File" },
+		b = { "<cmd>FzfLua buffers<cr>", "Find buffer" },
+		t = { "<cmd>FzfLua grep<cr>", "Text" },
+		w = { "<cmd>FzfLua grep_cword<cr>", "Current word" },
+		v = { "<cmd>FzfLua grep_visual<cr>", "Visual" },
+		g = { "<cmd>FzfLua git_status<cr>", "Git status" },
 	},
+
 	d = {
 		name = "Diagnostics",
 		a = { "<cmd>LspDiagLine<cr>", "Current line" },
-		d = { "<cmd>TroubleToggle<cr>", "Trouble" },
+		d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document" },
 	},
 }
 

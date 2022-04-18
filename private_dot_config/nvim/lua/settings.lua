@@ -12,7 +12,7 @@ cmd("set synmaxcol=200") -- Limits the syntax highlighting
 vim.o.termguicolors = true
 vim.o.background = "dark"
 vim.g.syntax = true
-vim.cmd([[colorscheme catppuccin]])
+cmd([[colorscheme catppuccin]])
 
 -- SETTINGS
 opt.backup = false -- creates a backup file
@@ -40,6 +40,7 @@ opt.undofile = true -- enable persisten undo
 opt.updatetime = 300 -- faster completion
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 opt.shortmess:append("c") -- don't pass messages to |ins-completion-menu|
+opt.laststatus = 3 -- show a unique status bar across all windows
 
 -- Tabs and spaces: Overwritte in ftplugins
 opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
