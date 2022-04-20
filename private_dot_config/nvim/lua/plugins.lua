@@ -11,7 +11,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 		"https://github.com/wbthomason/packer.nvim",
 		install_path,
 	})
-	print("Installing packer close and reopen Neovim...")
+	vim.notify("Installing packer close and reopen Neovim...")
 	vim.cmd([[packadd packer.nvim]])
 end
 
@@ -117,6 +117,13 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	use({
+		"rcarriga/nvim-notify",
+		config = function()
+			require("plugins/vim-notify")
+		end,
+	})
+
 	-- Comments
 	use({
 		"numToStr/Comment.nvim",
@@ -170,11 +177,14 @@ return require("packer").startup(function(use)
 
 	-- Explorer
 	use({
-		"preservim/nerdtree",
+		"kyazdani42/nvim-tree.lua",
+		requires = {
+			"kyazdani42/nvim-web-devicons", -- optional, for file icon
+		},
 		config = function()
-			require("plugins/nerdtree")
+			require("plugins/nvim-tree")
 		end,
-	}) -- TODO: Revisit nvim-tree if it improves
+	})
 
 	-- Color
 	use({

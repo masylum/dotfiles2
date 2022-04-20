@@ -34,7 +34,7 @@ require("which-key").setup({
 	show_help = true, -- show help message on the command line when the popup is visible
 })
 
-vim.api.nvim_set_keymap("n", "<Space>", "<NOP>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Space>", "<NOP>", { silent = true })
 vim.g.mapleader = " "
 
 local opts = {
@@ -46,12 +46,12 @@ local opts = {
 	nowait = false, -- use `nowait` when creating keymaps
 }
 
--- NerdTree
-vim.api.nvim_set_keymap("n", "<Leader>n", ":NERDTreeToggle<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>f", ":NERDTreeFind<CR>", { noremap = true, silent = true })
+-- NvimTree
+vim.keymap.set("n", "<Leader>n", ":NvimTreeToggle<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>f", ":NvimTreeFindFile<CR>", { silent = true })
 
 -- No Highlights
-vim.api.nvim_set_keymap("n", "<Leader>h", ':let @/=""<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>h", ":let @/=""<CR>", { silent = true })
 
 local mappings = {
 	n = "NerdTree",

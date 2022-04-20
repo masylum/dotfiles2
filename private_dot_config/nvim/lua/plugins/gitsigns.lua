@@ -1,4 +1,5 @@
-vim.cmd("hi def GitSignsCurrentLineBlame guifg=#988BA2 ctermfg=244")
+local colors = require("catppuccin.api.colors").get_colors()
+vim.cmd("hi def GitSignsCurrentLineBlame guifg=" .. colors.gray1 .. " ctermfg=244")
 
 require("gitsigns").setup({
 	signs = {

@@ -1,7 +1,3 @@
-local hide_in_width = function()
-	return vim.fn.winwidth(0) > 80
-end
-
 local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
@@ -12,16 +8,15 @@ local diagnostics = {
 	always_visible = false,
 }
 
-local filetype = {
-	"filetype",
-	icons_enabled = false,
-	icon = nil,
-}
-
 local branch = {
 	"branch",
 	icons_enabled = true,
 	icon = "",
+}
+
+local location = {
+	"location",
+	padding = 0,
 }
 
 require("lualine").setup({
@@ -36,13 +31,13 @@ require("lualine").setup({
 	},
 	sections = {
 		lualine_a = { branch, diagnostics },
-		lualine_b = { "filename" },
-		lualine_c = {},
+		lualine_b = {},
+		lualine_c = { "filename" },
 		lualine_x = { "filetype" },
-		lualine_y = { "location" },
+		lualine_y = { location },
 		lualine_z = { "progress" },
 	},
 	inactive_sections = {},
 	tabline = {},
-	extensions = { "fugitive", "nerdtree" },
+	extensions = { "fugitive", "nvim-tree" },
 })
