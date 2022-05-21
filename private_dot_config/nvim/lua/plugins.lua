@@ -98,9 +98,6 @@ return require("packer").startup(function(use)
 	})
 	use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
-	-- Neoformat
-	use({ "sbdchd/neoformat" })
-
 	-- Gitsigns
 	use({
 		"lewis6991/gitsigns.nvim",

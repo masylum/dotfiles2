@@ -51,7 +51,7 @@ vim.keymap.set("n", "<Leader>n", ":NvimTreeToggle<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>f", ":NvimTreeFindFile<CR>", { silent = true })
 
 -- No Highlights
-vim.keymap.set("n", "<Leader>h", ":let @/=""<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>h", ":let @/=''<CR>", { silent = true })
 
 local mappings = {
 	n = "NerdTree",
@@ -70,7 +70,7 @@ local mappings = {
 		a = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
 		d = { "<cmd>TroubleToggle lsp_definitions<cr>", "Definitions" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
-		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+		r = { "<cmd>LspRename<cr>", "Rename" },
 	},
 
 	s = {
@@ -86,7 +86,7 @@ local mappings = {
 	d = {
 		name = "Diagnostics",
 		a = { "<cmd>LspDiagLine<cr>", "Current line" },
-		d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document" },
+		d = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Document" },
 	},
 }
 

@@ -22,10 +22,10 @@ for _, sign in ipairs(signs) do
 end
 
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = { severity = vim.diagnostic.severity.ERROR },
 	signs = { active = signs },
 	underline = true,
-	update_in_insert = false,
+	update_in_insert = true,
 	severity_sort = true,
 	float = border_opts,
 })
@@ -33,29 +33,43 @@ vim.diagnostic.config({
 lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, border_opts)
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, border_opts)
 
-global.lsp = {
-	float = border_opts,
-	formatting = require("lsp.formatting"),
-}
+local lsp_formatting = function(bufnr)
+	vim.lsp.buf.format({
+		filter = function(clients)
+			-- filter out clients that you don't want to use
+			return vim.tbl_filter(function(client)
+				return client.name ~= "tsserver"
+			end, clients)
+		end,
+		bufnr = bufnr,
+	})
+end
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local on_attach = function(client, bufnr)
-	u.lua_command("LspHover", "vim.lsp.buf.hover()")
-	u.lua_command("LspRename", "vim.lsp.buf.rename()")
-	u.lua_command("LspDiagPrev", "vim.diagnostic.goto_prev()")
-	u.lua_command("LspDiagNext", "vim.diagnostic.goto_next()")
-	u.lua_command("LspDiagLine", "vim.diagnostic.open_float(nil, global.lsp.border_opts)")
+	u.buf_command(bufnr, "LspHover", vim.lsp.buf.hover)
+	u.buf_command(bufnr, "LspDiagPrev", vim.diagnostic.goto_prev)
+	u.buf_command(bufnr, "LspDiagNext", vim.diagnostic.goto_next)
+	u.buf_command(bufnr, "LspDiagLine", vim.diagnostic.open_float)
+	u.buf_command(bufnr, "LspTypeDef", vim.lsp.buf.type_definition)
+	u.buf_command(bufnr, "LspRename", function()
+		vim.lsp.buf.rename()
+	end)
 
 	u.buf_map(bufnr, "n", "K", ":LspHover<CR>")
 	u.buf_map(bufnr, "n", "[a", ":LspDiagPrev<CR>")
 	u.buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>")
+	u.buf_map(bufnr, "n", "gh", ":LspTypeDef<CR>")
 
 	if client.supports_method("textDocument/formatting") then
-		vim.cmd([[
-        augroup LspFormatting
-        autocmd! * <buffer>
-        autocmd BufWritePost <buffer> lua global.lsp.formatting()
-        augroup END
-        ]])
+		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = augroup,
+			buffer = bufnr,
+			callback = function()
+				lsp_formatting(bufnr)
+			end,
+		})
 	end
 
 	require("illuminate").on_attach(client)

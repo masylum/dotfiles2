@@ -25,14 +25,18 @@ require("lualine").setup({
 		theme = "catppuccin",
 		component_separators = "",
 		section_separators = "",
-		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
 		globalstatus = true,
 	},
 	sections = {
 		lualine_a = { branch, diagnostics },
 		lualine_b = {},
-		lualine_c = { "filename" },
+		lualine_c = {
+			{
+				"filename",
+				path = 2,
+			},
+		},
 		lualine_x = { "filetype" },
 		lualine_y = { location },
 		lualine_z = { "progress" },

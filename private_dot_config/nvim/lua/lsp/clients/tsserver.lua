@@ -21,8 +21,8 @@ M.get_ops = function(on_attach)
 			ts_utils.setup_client(client)
 
 			u.buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
-			u.buf_map(bufnr, "n", "gI", ":TSLspRenameFile<CR>")
-			u.buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
+			u.buf_map(bufnr, "n", "gr", ":TSLspRenameFile<CR>")
+			u.buf_map(bufnr, "n", "gi", ":TSLspImportAll<CR>")
 		end,
 	}
 end

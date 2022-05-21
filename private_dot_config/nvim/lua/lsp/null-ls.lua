@@ -1,24 +1,29 @@
 local null_ls = require("null-ls")
 local b = null_ls.builtins
 
+-- TODO: Only enable `/.nvim` if available
 local sources = {
-	b.diagnostics.eslint.with({
-		condition = function(utils)
-			return utils.root_has_file(".eslintrc.js")
-		end,
-		diagnostics_format = "#{m} [#{c}]",
+	b.diagnostics.eslint_d.with({
+		command = ".nvim/eslint_d",
+		args = { "$FILENAME" },
+	}),
+	b.diagnostics.shellcheck.with({
+		command = ".nvim/shellcheck",
+		args = { "$FILENAME" },
+	}),
+	b.diagnostics.semgrep.with({
+		command = ".nvim/semgrep",
 	}),
 	b.diagnostics.markdownlint,
-	b.diagnostics.shellcheck.with({
-		diagnostics_format = "#{m} [#{c}]",
-	}),
 	b.diagnostics.write_good,
 	b.diagnostics.rubocop,
 
-	b.formatting.prettier_standard,
+	b.formatting.eslint_d,
 	b.formatting.shfmt,
 	b.formatting.stylua,
-	b.formatting.trim_whitespace.with({ filetypes = { "tmux", "zsh" } }),
+	b.formatting.trim_whitespace.with({
+		filetypes = { "tmux", "zsh" },
+	}),
 	-- b.formatting.rubocop,
 	b.formatting.terraform_fmt,
 }
