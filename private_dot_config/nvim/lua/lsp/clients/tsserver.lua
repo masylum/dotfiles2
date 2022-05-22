@@ -13,6 +13,7 @@ M.get_ops = function(on_attach)
 
 			ts_utils.setup({
 				-- debug = true,
+				auto_inlay_hints = false,
 				import_all_scan_buffers = 100,
 				update_imports_on_move = true,
 				-- filter out dumb module warning
@@ -22,7 +23,7 @@ M.get_ops = function(on_attach)
 
 			u.buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
 			u.buf_map(bufnr, "n", "gr", ":TSLspRenameFile<CR>")
-			u.buf_map(bufnr, "n", "gi", ":TSLspImportAll<CR>")
+			u.buf_map(bufnr, "n", "gI", ":TSLspImportAll<CR>")
 		end,
 	}
 end

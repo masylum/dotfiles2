@@ -1,24 +1,27 @@
 local null_ls = require("null-ls")
 local b = null_ls.builtins
 
--- TODO: Only enable `/.nvim` if available
+local with_root_file = function(...)
+	local files = { ... }
+	return function(utils)
+		return utils.root_has_file(files)
+	end
+end
+
 local sources = {
-	b.diagnostics.eslint_d.with({
-		command = ".nvim/eslint_d",
-		args = { "$FILENAME" },
-	}),
 	b.diagnostics.shellcheck.with({
 		command = ".nvim/shellcheck",
 		args = { "$FILENAME" },
 	}),
 	b.diagnostics.semgrep.with({
 		command = ".nvim/semgrep",
+		condition = with_root_file(".semgrep.yml"),
+		args = { "$FILENAME" },
 	}),
 	b.diagnostics.markdownlint,
 	b.diagnostics.write_good,
 	b.diagnostics.rubocop,
 
-	b.formatting.eslint_d,
 	b.formatting.shfmt,
 	b.formatting.stylua,
 	b.formatting.trim_whitespace.with({
@@ -29,6 +32,7 @@ local sources = {
 }
 
 local M = {}
+
 M.setup = function(on_attach)
 	null_ls.setup({
 		-- debug = true,

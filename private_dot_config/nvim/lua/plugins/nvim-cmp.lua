@@ -17,13 +17,20 @@ cmp.setup({
 			menu = {
 				buffer = "[Buffer]",
 				nvim_lsp = "[LSP]",
-				nvim_lua = "[Lua]",
+				vsnip = "[Vsnip]",
 			},
+		}),
+	},
+	window = {
+		completion = cmp.config.window.bordered({
+			winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+		}),
+		documentation = cmp.config.window.bordered({
+			winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
 		}),
 	},
 	experimental = {
 		ghost_text = false,
-		native_menu = false,
 	},
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
@@ -62,16 +69,10 @@ cmp.setup({
 		end, { "i", "s" }),
 	},
 	sources = cmp.config.sources({
+		{ name = "vsnip", priority = 9999 },
 		{ name = "nvim_lsp" },
-		{ name = "vsnip" },
-		{ name = "buffer" },
 		{ name = "buffer" },
 	}),
-	window = {
-		documentation = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-		},
-	},
 })
 
 -- TODO: Enable this and make it work?

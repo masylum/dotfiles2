@@ -26,10 +26,4 @@ require("nvim-treesitter.configs").setup({
 			},
 		},
 	},
-	-- nvim-autopairs
-	autopairs = {
-		enable = true,
-	},
-	-- vim-matchup
-	matchup = { enable = true },
 })

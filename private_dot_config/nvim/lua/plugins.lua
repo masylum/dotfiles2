@@ -41,6 +41,13 @@ packer.init({
 return require("packer").startup(function(use)
 	use({ "wbthomason/packer.nvim" })
 
+	-- Need to load first
+	use({ "lewis6991/impatient.nvim" })
+	use({ "nathom/filetype.nvim" })
+	use({ "nvim-lua/plenary.nvim" })
+	use({ "nvim-lua/popup.nvim" })
+	use({ "kyazdani42/nvim-web-devicons" })
+
 	-- LSP
 	use({
 		"neovim/nvim-lspconfig", -- A collection of common configurations for Neovim's built-in language server client.
@@ -54,10 +61,6 @@ return require("packer").startup(function(use)
 			require("plugins/vim-illuminate")
 		end,
 	}) -- Illuminates current word in the document
-
-	-- General dependencies
-	use({ "nvim-lua/popup.nvim" })
-	use({ "nvim-lua/plenary.nvim" })
 
 	-- Fuzzy finder
 	use({ "junegunn/fzf", run = "./install --all" })
@@ -129,9 +132,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Icons
-	use({ "kyazdani42/nvim-web-devicons" })
-
 	-- Show indent lines
 	use({
 		"lukas-reineke/indent-blankline.nvim",
@@ -153,23 +153,18 @@ return require("packer").startup(function(use)
 	-- Better quickfix
 	use({
 		"kevinhwang91/nvim-bqf",
-		event = "BufRead",
+		ft = "qf",
 	})
 
 	-- LSP addons
 	use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
 	use({ "jose-elias-alvarez/null-ls.nvim" })
-
-	-- Autotags <div>|</div>
 	use({
-		"windwp/nvim-ts-autotag",
-		event = "InsertEnter",
-	})
-
-	-- Text objects using hint labels
-	use({
-		"mfussenegger/nvim-ts-hint-textobject",
-		event = "BufRead",
+		"stevearc/dressing.nvim",
+		requires = "MunifTanjim/nui.nvim",
+		config = function()
+			require("plugins/dressing")
+		end,
 	})
 
 	-- Explorer

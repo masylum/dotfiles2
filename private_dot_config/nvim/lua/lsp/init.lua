@@ -22,7 +22,7 @@ for _, sign in ipairs(signs) do
 end
 
 vim.diagnostic.config({
-	virtual_text = { severity = vim.diagnostic.severity.ERROR },
+	virtual_text = true,
 	signs = { active = signs },
 	underline = true,
 	update_in_insert = true,
@@ -34,14 +34,20 @@ lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_hel
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, border_opts)
 
 local lsp_formatting = function(bufnr)
-	vim.lsp.buf.format({
+	lsp.buf.format({
+		bufnr = bufnr,
 		filter = function(clients)
-			-- filter out clients that you don't want to use
 			return vim.tbl_filter(function(client)
-				return client.name ~= "tsserver"
+				if client.name == "eslint" then
+					return true
+				end
+				if client.name == "null-ls" then
+					return not u.table.some(clients, function(_, other_client)
+						return other_client.name == "eslint"
+					end)
+				end
 			end, clients)
 		end,
-		bufnr = bufnr,
 	})
 end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -62,13 +68,15 @@ local on_attach = function(client, bufnr)
 	u.buf_map(bufnr, "n", "gh", ":LspTypeDef<CR>")
 
 	if client.supports_method("textDocument/formatting") then
+		u.buf_command(bufnr, "LspFormatting", function()
+			lsp_formatting(bufnr)
+		end)
+
 		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = augroup,
 			buffer = bufnr,
-			callback = function()
-				lsp_formatting(bufnr)
-			end,
+			command = "LspFormatting",
 		})
 	end
 
@@ -90,4 +98,4 @@ lsp_installer.on_server_ready(function(server)
 	server:setup(vim.tbl_deep_extend("force", opts, client_ops))
 end)
 
-require("lsp.null-ls").setup(on_attach)
+require("lsp.clients.null-ls").setup(on_attach)
