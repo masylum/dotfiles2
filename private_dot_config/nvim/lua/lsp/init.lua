@@ -35,21 +35,21 @@ lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_hel
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, border_opts)
 
 local lsp_formatting = function(bufnr)
-	lsp.buf.format({
-		bufnr = bufnr,
-		filter = function(clients)
-			return vim.tbl_filter(function(client)
-				if client.name == "eslint" then
-					return true
-				end
-				if client.name == "null-ls" then
-					return not u.table.some(clients, function(_, other_client)
-						return other_client.name == "eslint"
-					end)
-				end
-			end, clients)
-		end,
-	})
+   local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+   lsp.buf.format({
+       bufnr = bufnr,
+       filter = function(client)
+           if client.name == "eslint" then
+               return not eslint_disabled_buffers[bufnr]
+           end
+
+           if client.name == "null-ls" then
+               return not u.table.some(clients, function(_, other_client)
+                   return other_client.name == "eslint" and not eslint_disabled_buffers[bufnr]
+               end)
+           end
+       end,
+   })
 end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
