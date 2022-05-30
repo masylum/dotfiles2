@@ -7,7 +7,7 @@ source ~/.config/bash/prompt.bash
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # TODO: template?
-eval $(/opt/homebrew/bin/brew shellenv)
+# eval $(/opt/homebrew/bin/brew shellenv)
 
 # cargo
 export PATH="$HOME/.cargo/bin:$PATH"
