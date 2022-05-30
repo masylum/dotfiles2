@@ -9,6 +9,11 @@ local with_root_file = function(...)
 end
 
 local sources = {
+	b.diagnostics.rubocop.with({
+		command = ".nvim/rubocop",
+		condition = with_root_file(".rubocop.yml"),
+		timeout = 30000,
+	}),
 	b.diagnostics.shellcheck.with({
 		command = ".nvim/shellcheck",
 		args = { "$FILENAME" },
@@ -35,7 +40,7 @@ local M = {}
 
 M.setup = function(on_attach)
 	null_ls.setup({
-		-- debug = true,
+		debug = true,
 		sources = sources,
 		on_attach = on_attach,
 	})

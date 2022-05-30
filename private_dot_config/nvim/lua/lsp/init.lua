@@ -1,4 +1,5 @@
 local lsp_installer = require("nvim-lsp-installer")
+local lspconfig = require("lspconfig")
 local u = require("utils")
 local lsp = vim.lsp
 
