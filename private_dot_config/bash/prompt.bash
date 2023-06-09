@@ -13,9 +13,9 @@ grb_git_prompt() {
   fi
 }
 
-_RESET=$(tput sgr0)
-_BOLD=$(tput bold)
-_BLUE=$(tput setaf 4)
-_GREEN=$(tput setaf 2)
+_RESET="\e[0m"
+_BOLD="\e[1m"
+_BLUE="\e[34m"
+_GREEN="\e[32m"
 
 PS1="${_GREEN}\w ${_BLUE}$(grb_git_prompt) ${_BOLD}\$ ${_RESET}"
