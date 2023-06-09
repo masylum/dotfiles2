@@ -2,7 +2,7 @@ local M = {}
 local lspconfig = require("lspconfig")
 
 M.setup = function(on_attach, capabilities)
-    lspconfig.solargraph.setup({
+    lspconfig.pyright.setup({
         on_attach = on_attach,
         capabilities = capabilities,
     })
