@@ -13,4 +13,9 @@ grb_git_prompt() {
   fi
 }
 
-PS1="\[\033[01;32m\]\w\[\033[01;34m\]\$(grb_git_prompt) \[\033[00m\]\$ "
+_RESET=$(tput sgr0)
+_BOLD=$(tput bold)
+_BLUE=$(tput setaf 4)
+_GREEN=$(tput setaf 2)
+
+PS1="${_GREEN}\w ${_BLUE}$(grb_git_prompt) ${_BOLD}\$ ${_RESET}"

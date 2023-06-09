@@ -11,8 +11,3 @@ popd
 chezmoi apply
 
 source ~/.bashrc
-
-# Install packer dependencies
-# nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' & disown
-# nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' & disown # Yep, twice
-# nvim --headless -c 'TSUpdateSync' & disown
