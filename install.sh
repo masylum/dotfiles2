@@ -11,3 +11,5 @@ popd
 chezmoi apply
 
 source ~/.bashrc
+
+echo "Done!"
