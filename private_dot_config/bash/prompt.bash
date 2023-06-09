@@ -14,8 +14,8 @@ grb_git_prompt() {
 }
 
 _RESET="\e[0m"
-_BOLD="\e[1m"
+_YELLOW="\e[33m"
 _BLUE="\e[34m"
 _GREEN="\e[32m"
 
-PS1="${_GREEN}\w ${_BLUE}$(grb_git_prompt) ${_BOLD}\$ ${_RESET}"
+PS1="${_GREEN}\w${_BLUE}$(grb_git_prompt) ${_YELLOW}\$ ${_RESET}"
