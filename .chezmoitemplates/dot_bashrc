@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source ~/.config/bash/alias.bash
-source ~/.config/bash/colors.bash
 source ~/.config/bash/git.bash # Needed for the prompt
 source ~/.config/bash/prompt.bash
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -15,15 +14,12 @@ export EDITOR=nvim
 # Set the vi mode for bash
 set -o vi
 
-# Unbreak broken, non-colored terminal
-alias ls='ls -G'
-alias ll='ls -lG'
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
-
 # Erase duplicates in history
 export HISTCONTROL=erasedups
+
 # Store 10k history entries
 export HISTSIZE=10000
+
 # Append to the history file when exiting instead of overwriting it
 shopt -s histappend
 
@@ -31,3 +27,6 @@ shopt -s histappend
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# poetry shenanigans
+export PATH="$HOME/.local/bin:$PATH"`
