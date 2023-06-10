@@ -199,4 +199,3 @@ _poetry_515d3a2472721f72_complete()
 }
 
 complete -o default -F _poetry_515d3a2472721f72_complete poetry
-complete -o default -F _poetry_515d3a2472721f72_complete /Users/pau/Library/Application Support/pypoetry/venv/bin/poetry
