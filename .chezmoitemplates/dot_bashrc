@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source ~/.config/bash/alias.bash
-source ~/.config/bash/git.bash # Needed for the prompt
 source ~/.config/bash/prompt.bash
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
