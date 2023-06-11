@@ -1,6 +1,1 @@
-_RESET="\[\e[0m\["
-_YELLOW="\[\e[33m\["
-_BLUE="\[\e[34m\["
-_GREEN="\[\e[32m\["
-
-PS1="${_GREEN}\w${_BLUE}\$(__git_ps1 "(%s)") ${_YELLOW}\$ ${_RESET}"
+PS1="\[\033[01;32m\]\w\[\033[01;34m\]\$(grb_git_prompt)\[\033[01;33m\]\$ \[\033[00m\]"
