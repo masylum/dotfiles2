@@ -27,7 +27,6 @@ shopt -s histappend
 # pyenv shenanigans
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 # poetry shenanigans
 export PATH="$HOME/.local/bin:$PATH"

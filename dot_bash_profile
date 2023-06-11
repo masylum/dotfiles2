@@ -3,3 +3,8 @@ if [ -f $HOME/.bashrc ]; then
 fi
 
 eval $(/opt/homebrew/bin/brew shellenv)
+
+# pyenv shenanigans
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
