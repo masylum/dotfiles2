@@ -31,3 +31,6 @@ eval "$(pyenv init -)"
 
 # poetry shenanigans
 export PATH="$HOME/.local/bin:$PATH"
+
+# Hide macos annoying message
+export BASH_SILENCE_DEPRECATION_WARNING=1
