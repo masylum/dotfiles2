@@ -56,8 +56,7 @@ local servers = {
   "syntax_tree",
   "lua_ls",
   "null-ls",
-  "pyright",
-  "pylsp"
+  "pyright"
 }
 
 for _, server in pairs(servers) do

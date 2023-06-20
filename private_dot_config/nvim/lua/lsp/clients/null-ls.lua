@@ -9,23 +9,34 @@ local with_root_file = function(...)
 end
 
 local sources = {
-  b.diagnostics.rubocop.with({
-    condition = with_root_file(".rubocop.yml"),
-    command = "bundle",
-    args = { "exec", "rubocop", "-f", "json", "--stdin", "$FILENAME" },
-  }),
+  -- Semgrep
   b.diagnostics.semgrep.with({
     condition = with_root_file(".semgrep.yml"),
   }),
 
-  b.formatting.trim_whitespace.with({
-    filetypes = { "tmux", "zsh" },
+  -- Ruby
+  b.diagnostics.rubocop.with({
+    condition = with_root_file(".rubocop.yml"),
+    command = "bundle",
+    args = { "exec", "rubocop", "-f", "json", "--stdin", "$FILENAME" },
   }),
   b.formatting.rubocop.with({
     condition = with_root_file(".rubocop.yml"),
     command = "bundle",
     args = { "exec", "rubocop", "--auto-correct", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" },
   }),
+
+  -- Python
+  b.formatting.ruff,
+  b.formatting.black,
+  b.formatting.isort,
+  b.diagnostics.ruff,
+
+  -- Others
+  b.formatting.trim_whitespace.with({
+    filetypes = { "tmux", "zsh" },
+  }),
+
 
   -- b.formatting.shfmt,
   -- b.formatting.stylua,
