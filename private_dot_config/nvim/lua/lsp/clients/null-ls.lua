@@ -27,10 +27,10 @@ local sources = {
   }),
 
   -- Python
-  -- b.formatting.ruff,
-  -- b.formatting.black,
-  -- b.formatting.isort,
-  -- b.diagnostics.ruff,
+  b.formatting.ruff,
+  b.formatting.black,
+  b.formatting.isort,
+  b.diagnostics.ruff,
 
   -- Others
   b.formatting.trim_whitespace.with({
