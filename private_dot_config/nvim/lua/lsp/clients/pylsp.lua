@@ -30,6 +30,7 @@ M.setup = function(on_attach, capabilities)
           rope_autoimport = { enabled = true },
           rope_completion = { enabled = true },
           yapf = { enabled = false },
+          pylsp_mypy = { enabled = true },
           ruff = {
             enabled = true,
             extendSelect = { "I" },
