@@ -21,7 +21,7 @@ local function get_python_path(workspace)
 end
 
 M.setup = function(on_attach, capabilities)
-  lspconfig.pyright.setup({
+  lspconfig.pylsp.setup({
     settings = {
       pylsp = {
         plugins = {
@@ -37,7 +37,7 @@ M.setup = function(on_attach, capabilities)
         }
       },
       before_init = function(_, config)
-        config.settings.python.pythonPath = get_python_path(config.root_dir)
+        config.settings.pylsp.plugins.jedi.extra_paths = get_python_path(config.root_dir)
       end,
       on_attach = on_attach,
       capabilities = capabilities,
