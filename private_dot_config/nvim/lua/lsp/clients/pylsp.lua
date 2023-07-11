@@ -36,12 +36,12 @@ M.setup = function(on_attach, capabilities)
           }
         }
       },
-      before_init = function(_, config)
-        config.settings.pylsp.plugins.jedi.extra_paths = get_python_path(config.root_dir)
-      end,
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }
+    },
+    before_init = function(_, config)
+      config.settings.pylsp.plugins.jedi.extra_paths = get_python_path(config.root_dir)
+    end,
+    on_attach = on_attach,
+    capabilities = capabilities,
   })
 end
 
